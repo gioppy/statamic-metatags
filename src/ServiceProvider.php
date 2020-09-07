@@ -11,10 +11,6 @@ class ServiceProvider extends AddonServiceProvider {
     Tags\MetatagsTags::class,
   ];
 
-  protected $fieldtypes = [
-    Fieldtypes\MetatagsFieldtype::class,
-  ];
-
   protected $scripts = [
     __DIR__ . '/../resources/dist/js/cp.js',
   ];
