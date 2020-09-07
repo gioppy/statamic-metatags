@@ -1,0 +1,29 @@
+{
+    "name": "gioppy/statamic-metatags",
+    "description": "An addon for Statamic 3 to manage and customize any meta tag.",
+    "autoload": {
+        "psr-4": {
+          "Gioppy\\StatamicMetatags\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Giovanni Buffa",
+            "email": "tech@giovannibuffa.it"
+        }
+    ],
+    "extra": {
+        "statamic": {
+            "name": "Meta tags",
+            "description": "An addon for Statamic 3 to manage and customize any meta tag."
+        },
+        "laravel": {
+            "providers": [
+              "Gioppy\\StatamicMetatags\\ServiceProvider"
+            ]
+        }
+    },
+    "require": {
+        "statamic/cms": "3.0.*"
+    }
+}
