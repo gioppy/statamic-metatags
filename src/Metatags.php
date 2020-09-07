@@ -330,6 +330,142 @@ class Metatags {
           'type' => 'section'
         ]
       ],
+      [
+        'handle' => 'dublin_core_title',
+        'field' => [
+          'display' => __('statamic-metatags::dc.title'),
+          'instructions' => __('statamic-metatags::dc.title_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_creator',
+        'field' => [
+          'display' => __('statamic-metatags::dc.creator'),
+          'instructions' => __('statamic-metatags::dc.creator_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_subject',
+        'field' => [
+          'display' => __('statamic-metatags::dc.subject'),
+          'instructions' => __('statamic-metatags::dc.subject_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_description',
+        'field' => [
+          'display' => __('statamic-metatags::dc.description'),
+          'instructions' => __('statamic-metatags::dc.description_instructions'),
+          'type' => 'textarea',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_publisher',
+        'field' => [
+          'display' => __('statamic-metatags::dc.publisher'),
+          'instructions' => __('statamic-metatags::dc.publisher_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_contributor',
+        'field' => [
+          'display' => __('statamic-metatags::dc.contributor'),
+          'instructions' => __('statamic-metatags::dc.contributor_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_date',
+        'field' => [
+          'display' => __('statamic-metatags::dc.date'),
+          'instructions' => __('statamic-metatags::dc.date_instructions'),
+          'time_enabled' => true,
+          'type' => 'date',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_type',
+        'field' => [
+          'display' => __('statamic-metatags::dc.type'),
+          'instructions' => __('statamic-metatags::dc.type_instructions'),
+          'options' => [
+            'Collection' => 'Collection',
+            'Dataset' => 'Dataset',
+            'Event' => 'Event',
+            'Image' => 'Image',
+            'InteractiveResource' => 'Interactive Resource',
+            'MovingImage' => 'Moving Image',
+            'PhysicalObject' => 'Physical Object',
+            'Service' => 'Service',
+            'Software' => 'Software',
+            'Sound' => 'Sound',
+            'StillImage' => 'Still Image',
+            'Text' => 'Text'
+          ],
+          'type' => 'select',
+          'clearable' => true,
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_format',
+        'field' => [
+          'display' => __('statamic-metatags::dc.format'),
+          'instructions' => __('statamic-metatags::dc.format_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_identifier',
+        'field' => [
+          'display' => __('statamic-metatags::dc.identifier'),
+          'instructions' => __('statamic-metatags::dc.identifier_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_source',
+        'field' => [
+          'display' => __('statamic-metatags::dc.source'),
+          'instructions' => __('statamic-metatags::dc.source_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_language',
+        'field' => [
+          'display' => __('statamic-metatags::dc.language'),
+          'instructions' => __('statamic-metatags::dc.language_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_relation',
+        'field' => [
+          'display' => __('statamic-metatags::dc.relation'),
+          'instructions' => __('statamic-metatags::dc.relation_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_coverage',
+        'field' => [
+          'display' => __('statamic-metatags::dc.coverage'),
+          'instructions' => __('statamic-metatags::dc.coverage_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_rights',
+        'field' => [
+          'display' => __('statamic-metatags::dc.rights'),
+          'instructions' => __('statamic-metatags::dc.rights_instructions'),
+          'type' => 'text',
+        ]
+      ],
     ];
 
     return $this;

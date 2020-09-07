@@ -42,6 +42,27 @@
 {{ /fields }}
 {{ /if }}
 
+{{ if settings | in_array:dublin_core }}
+<!-- DUBLIN CORE -->
+{{ fields }}
+  {{ if dublin_core_title }}<meta name="dcterms.title" content="{{ dublin_core_title }}" />{{ /if }}
+  {{ if dublin_core_creator }}<meta name="dcterms.creator" content="{{ dublin_core_creator }}" />{{ /if }}
+  {{ if dublin_core_subject }}<meta name="dcterms.subject" content="{{ dublin_core_subject }}" />{{ /if }}
+  {{ if dublin_core_description }}<meta name="dcterms.description" content="{{ dublin_core_description }}" />{{ /if }}
+  {{ if dublin_core_publisher }}<meta name="dcterms.publisher" content="{{ dublin_core_publisher }}" />{{ /if }}
+  {{ if dublin_core_contributor }}<meta name="dcterms.contributor" content="{{ dublin_core_contributor }}" />{{ /if }}
+  {{ if dublin_core_date }}<meta name="dcterms.date" content="{{ dublin_core_date format='c' }}" />{{ /if }}
+  {{ if dublin_core_type }}<meta name="dcterms.type" content="{{ dublin_core_type }}" />{{ /if }}
+  {{ if dublin_core_format }}<meta name="dcterms.format" content="{{ dublin_core_format }}" />{{ /if }}
+  {{ if dublin_core_identifier }}<meta name="dcterms.identifier" content="{{ dublin_core_identifier }}" />{{ /if }}
+  {{ if dublin_core_source }}<meta name="dcterms.source" content="{{ dublin_core_source }}" />{{ /if }}
+  {{ if dublin_core_language }}<meta name="dcterms.language" content="{{ dublin_core_language }}" />{{ /if }}
+  {{ if dublin_core_relation }}<meta name="dcterms.relation" content="{{ dublin_core_relation }}" />{{ /if }}
+  {{ if dublin_core_coverage }}<meta name="dcterms.coverage" content="{{ dublin_core_coverage }}" />{{ /if }}
+  {{ if dublin_core_rights }}<meta name="dcterms.rights" content="{{ dublin_core_rights }}" />{{ /if }}
+{{ /fields }}
+{{ /if }}
+
 {{ if settings | in_array:og }}
 <!-- OPEN GRAPH -->
 {{ extras.site }}<meta property="og:site_name" content="{{ name }}">{{ /extras.site }}
