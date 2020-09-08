@@ -480,6 +480,326 @@ class Metatags {
           'type' => 'section'
         ]
       ],
+      [
+        'handle' => 'dublin_core_advanced_abstract',
+        'field' => [
+          'display' => __('statamic-metatags::dc.abstract'),
+          'instructions' => __('statamic-metatags::dc.abstract_instructions'),
+          'type' => 'textarea',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_access_rights',
+        'field' => [
+          'display' => __('statamic-metatags::dc.access_rights'),
+          'instructions' => __('statamic-metatags::dc.access_rights_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_accrual_method',
+        'field' => [
+          'display' => __('statamic-metatags::dc.accrual_method'),
+          'instructions' => __('statamic-metatags::dc.accrual_method_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_accrual_periodicity',
+        'field' => [
+          'display' => __('statamic-metatags::dc.accrual_periodicity'),
+          'instructions' => __('statamic-metatags::dc.accrual_periodicity_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_accrual_policy',
+        'field' => [
+          'display' => __('statamic-metatags::dc.accrual_policy'),
+          'instructions' => __('statamic-metatags::dc.accrual_policy_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_alternative',
+        'field' => [
+          'display' => __('statamic-metatags::dc.alternative'),
+          'instructions' => __('statamic-metatags::dc.alternative_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_audience',
+        'field' => [
+          'display' => __('statamic-metatags::dc.audience'),
+          'instructions' => __('statamic-metatags::dc.audience_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_available',
+        'field' => [
+          'display' => __('statamic-metatags::dc.available'),
+          'instructions' => __('statamic-metatags::dc.available_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_bibliographic_citation',
+        'field' => [
+          'display' => __('statamic-metatags::dc.bibliographic_citation'),
+          'instructions' => __('statamic-metatags::dc.bibliographic_citation_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_conforms_to',
+        'field' => [
+          'display' => __('statamic-metatags::dc.conforms_to'),
+          'instructions' => __('statamic-metatags::dc.conforms_to_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_created',
+        'field' => [
+          'display' => __('statamic-metatags::dc.created'),
+          'instructions' => __('statamic-metatags::dc.created_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_date_accepted',
+        'field' => [
+          'display' => __('statamic-metatags::dc.date_accepted'),
+          'instructions' => __('statamic-metatags::dc.date_accepted_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_date_copyrighted',
+        'field' => [
+          'display' => __('statamic-metatags::dc.date_copyrighted'),
+          'instructions' => __('statamic-metatags::dc.date_copyrighted_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_date_submitted',
+        'field' => [
+          'display' => __('statamic-metatags::dc.date_submitted'),
+          'instructions' => __('statamic-metatags::dc.date_submitted_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_education_level',
+        'field' => [
+          'display' => __('statamic-metatags::dc.education_level'),
+          'instructions' => __('statamic-metatags::dc.education_level_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_extent',
+        'field' => [
+          'display' => __('statamic-metatags::dc.extent'),
+          'instructions' => __('statamic-metatags::dc.extent_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_has_format',
+        'field' => [
+          'display' => __('statamic-metatags::dc.has_format'),
+          'instructions' => __('statamic-metatags::dc.has_format_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_has_part',
+        'field' => [
+          'display' => __('statamic-metatags::dc.has_part'),
+          'instructions' => __('statamic-metatags::dc.has_part_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_has_version',
+        'field' => [
+          'display' => __('statamic-metatags::dc.has_version'),
+          'instructions' => __('statamic-metatags::dc.has_version_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_instructional_method',
+        'field' => [
+          'display' => __('statamic-metatags::dc.instructional_method'),
+          'instructions' => __('statamic-metatags::dc.instructional_method_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_is_format_of',
+        'field' => [
+          'display' => __('statamic-metatags::dc.is_format_of'),
+          'instructions' => __('statamic-metatags::dc.is_format_of_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_is_part_of',
+        'field' => [
+          'display' => __('statamic-metatags::dc.is_part_of'),
+          'instructions' => __('statamic-metatags::dc.is_part_of_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_is_referenced_by',
+        'field' => [
+          'display' => __('statamic-metatags::dc.is_referenced_by'),
+          'instructions' => __('statamic-metatags::dc.is_referenced_by_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_is_replaced_by',
+        'field' => [
+          'display' => __('statamic-metatags::dc.is_replaced_by'),
+          'instructions' => __('statamic-metatags::dc.is_replaced_by_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_is_required_by',
+        'field' => [
+          'display' => __('statamic-metatags::dc.is_required_by'),
+          'instructions' => __('statamic-metatags::dc.is_required_by_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_issued',
+        'field' => [
+          'display' => __('statamic-metatags::dc.issued'),
+          'instructions' => __('statamic-metatags::dc.issued_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_is_version_of',
+        'field' => [
+          'display' => __('statamic-metatags::dc.is_version_of'),
+          'instructions' => __('statamic-metatags::dc.is_version_of_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_license',
+        'field' => [
+          'display' => __('statamic-metatags::dc.license'),
+          'instructions' => __('statamic-metatags::dc.license_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_mediator',
+        'field' => [
+          'display' => __('statamic-metatags::dc.mediator'),
+          'instructions' => __('statamic-metatags::dc.mediator_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_medium',
+        'field' => [
+          'display' => __('statamic-metatags::dc.medium'),
+          'instructions' => __('statamic-metatags::dc.medium_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_modified',
+        'field' => [
+          'display' => __('statamic-metatags::dc.modified'),
+          'instructions' => __('statamic-metatags::dc.modified_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_provenance',
+        'field' => [
+          'display' => __('statamic-metatags::dc.provenance'),
+          'instructions' => __('statamic-metatags::dc.provenance_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_references',
+        'field' => [
+          'display' => __('statamic-metatags::dc.references'),
+          'instructions' => __('statamic-metatags::dc.references_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_replaces',
+        'field' => [
+          'display' => __('statamic-metatags::dc.replaces'),
+          'instructions' => __('statamic-metatags::dc.replaces_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_requires',
+        'field' => [
+          'display' => __('statamic-metatags::dc.requires'),
+          'instructions' => __('statamic-metatags::dc.requires_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_rights_holder',
+        'field' => [
+          'display' => __('statamic-metatags::dc.rights_holder'),
+          'instructions' => __('statamic-metatags::dc.rights_holder_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_spatial',
+        'field' => [
+          'display' => __('statamic-metatags::dc.spatial'),
+          'instructions' => __('statamic-metatags::dc.spatial_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_table_of_contents',
+        'field' => [
+          'display' => __('statamic-metatags::dc.table_of_contents'),
+          'instructions' => __('statamic-metatags::dc.table_of_contents_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_temporal',
+        'field' => [
+          'display' => __('statamic-metatags::dc.temporal'),
+          'instructions' => __('statamic-metatags::dc.temporal_instructions'),
+          'type' => 'text',
+        ]
+      ],
+      [
+        'handle' => 'dublin_core_advanced_valid',
+        'field' => [
+          'display' => __('statamic-metatags::dc.valid'),
+          'instructions' => __('statamic-metatags::dc.valid_instructions'),
+          'type' => 'text',
+        ]
+      ],
     ];
 
     return $this;
