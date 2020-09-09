@@ -18,17 +18,18 @@ class MetatagsTags extends Tags {
   protected static $handle = 'metatags';
 
   public function index() {
-    $prefix = $this->params->get('prefix', 'mt');
+    $settings = Settings::make();
 
-    $settings = Settings::make()->onlyMeta();
+    $settingsMeta = $settings->onlyMeta();
+    $settingsDefault = $settings->excludedMeta();
 
     $defaultValues = Arr::removeNullValues(DefaultMetatags::make()->values());
 
     $page = collect($this->context->get('page'));
 
     $fields = Arr::removeNullValues($page
-      ->filter(function ($item, $key) use ($settings) {
-        return Str::startsWith($key, $settings);
+      ->filter(function ($item, $key) use ($settingsMeta) {
+        return Str::startsWith($key, $settingsMeta);
       })
       ->map(function (Value $field, $key) use ($defaultValues) {
         if (is_null($field->raw()) && array_key_exists($key, $defaultValues)) {
@@ -38,13 +39,12 @@ class MetatagsTags extends Tags {
       })
       ->all());
 
-    //dump($fields);
-
     return view('statamic-metatags::metatags', [
       'fields' => $fields,
-      'settings' => $settings,
+      'settings' => $settingsMeta,
       'extras' => [
-        'site' => $this->context->get('site'),
+        'site_name' => $settingsDefault['site_name'],
+        'site_name_separator' => $settingsDefault['site_name_separator'],
         'permalink' => $page->get('permalink')
       ]
     ]);
