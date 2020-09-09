@@ -1289,7 +1289,7 @@ class Metatags {
         'field' => [
           'display' => __('statamic-metatags::og.product_price_amount'),
           'instructions' => __('statamic-metatags::og.product_price_amount_instructions'),
-          'type' => 'text',
+          'type' => 'taggable',
           'if' => [
             'og_type' => 'equals product'
           ],
@@ -1300,7 +1300,7 @@ class Metatags {
         'field' => [
           'display' => __('statamic-metatags::og.product_price_currency'),
           'instructions' => __('statamic-metatags::og.product_price_currency_instructions'),
-          'type' => 'text',
+          'type' => 'taggable',
           'if' => [
             'og_type' => 'equals product'
           ],
