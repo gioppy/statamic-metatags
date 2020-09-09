@@ -37,6 +37,12 @@ class Settings {
       ->all();
   }
 
+  public function excludedMeta() {
+    return collect(Yaml::file($this->path())->parse())
+      ->only(['site_name', 'site_name_separator'])
+      ->all();
+  }
+
   public function onlyMeta() {
     return collect(Yaml::file(__DIR__ . '/../resources/content/metatags.yaml')->parse())
       ->merge(Yaml::file($this->path())->parse())
