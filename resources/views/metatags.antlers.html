@@ -1,7 +1,7 @@
 {{ if settings | in_array:basic }}
 <!-- BASIC METATAGS-->
 {{ fields }}
-  {{ if basic_title }}<title>{{ basic_title }}</title>{{ /if }}
+  {{ if basic_title }}<title>{{ basic_title }} {{ extras.site_name_separator}} {{ extras.site_name}}</title>{{ /if }}
   {{ if basic_description }}<meta name="description" content="{{ basic_description }}" />{{ /if }}
   {{ if basic_keywords }}<meta name="keywords" content="{{ basic_keywords | join }}" />{{ /if }}
   {{ if basic_robots }}<meta name="robots" content="{{ basic_robots }}{{ value }}{{ if !last }}, {{ /if }}{{ /basic_robots }}" />{{ /if }}
@@ -16,8 +16,8 @@
   {{ if advanced_generator }}<meta name="generator" content="{{ advanced_generator }}" />{{ /if }}
   {{ if advanced_image }}<link rel="image_src" href="{{ advanced_image.permalink }}">{{ /if }}
   {{ if advanced_rights }}<meta name="copyright" content="{{ advanced_rights }}" />{{ /if }}
-  {{ if advanced_rating }}<meta name="rating" content="{{ advanced_rating:value }}" />{{ /if }}
-  {{ if advanced_referrer }}<meta name="referrer" content="{{ advanced_referrer:value }}" />{{ /if }}
+  {{ if advanced_rating }}<meta name="rating" content="{{ advanced_rating }}" />{{ /if }}
+  {{ if advanced_referrer }}<meta name="referrer" content="{{ advanced_referrer }}" />{{ /if }}
   {{ if advanced_short_link }}<link rel="shortlink" href="{{ advanced_short_link }}" />{{ /if }}
   {{ if advanced_original_source }}<link rel="original-source" href="{{ advanced_original_source }}" />{{ /if }}
   {{ if advanced_geo_position }}<meta name="geo.position" content="{{ advanced_geo_position }}" />{{ /if }}
@@ -110,28 +110,27 @@
 
 {{ if settings | in_array:og }}
 <!-- OPEN GRAPH -->
-{{ extras.site }}<meta property="og:site_name" content="{{ name }}">{{ /extras.site }}
+<meta property="og:site_name" content="{{ extras.site_name }}">
 {{ fields }}
   {{ if og_type }}<meta property="og:type" content="{{ og_type }}" />{{ /if }}
-  <!-- TODO: show page title on null -->
-  {{ if og_title }}<meta property="og:title" content="{{ og_title }}" />{{ /if }}
+  <meta property="og:title" content="{{ og_title ?? basic_title }}" />
   {{ if og_determiner }}<meta property="og:determiner" content="{{ og_determiner }}" />{{ /if }}
   {{ if og_description }}<meta property="og:description" content="{{ og_description }}" />{{ /if }}
   {{ if og_image }}
     {{ og_image }}
-    <meta property="og:image" content="{{ url }}" />
+    <meta property="og:image" content="{{ permalink }}" />
     <meta property="og:image:width" content="{{ width }}" />
     <meta property="og:image:height" content="{{ height }}" />
     {{ /og_image }}
   {{ /if }}
   {{ if og_audio }}
     {{ og_audio }}
-    <meta property="og:audio" content="{{ url }}" />
+    <meta property="og:audio" content="{{ permalink }}" />
     {{ /og_audio }}
   {{ /if }}
   {{ if og_video }}
     {{ og_video }}
-    <meta property="og:video" content="{{ url }}" />
+    <meta property="og:video" content="{{ permalink }}" />
     {{ /og_video }}
   {{ /if }}
 
@@ -250,9 +249,16 @@
 
   {{ if og_type == 'product' }}
     {{ if og_product_plural_title }}<meta property="product:plural_title" content="{{ og_product_plural_title }}" />{{ /if }}
-    <!-- TODO: amount and currency can be array -->
-    {{ if og_product_price_amount }}<meta property="product:price:amount" content="{{ og_product_price_amount }}" />{{ /if }}
-    {{ if og_product_price_currency }}<meta property="product:price:currency" content="{{ og_product_price_currency }}" />{{ /if }}
+    {{ if og_product_price_amount }}
+      {{ og_product_price_amount }}
+      <meta property="product:price:amount" content="{{ value }}" />
+      {{ /og_product_price_amount }}
+    {{ /if }}
+    {{ if og_product_price_currency }}
+      {{ og_product_price_currency }}
+      <meta property="product:price:currency" content="{{ value }}" />
+      {{ /og_product_price_currency }}
+    {{ /if }}
   {{ /if }}
 {{ /fields }}
 
