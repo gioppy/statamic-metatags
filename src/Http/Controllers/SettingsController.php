@@ -57,7 +57,7 @@ class SettingsController extends Controller {
                   'display' => __('statamic-metatags::fieldsets.general:site_name'),
                   'instructions' => __('statamic-metatags::fieldsets.general:site_name:instructions'),
                   'type' => 'text',
-                  'width' => 75,
+                  'width' => 50,
                 ]
               ],
               [
@@ -66,7 +66,7 @@ class SettingsController extends Controller {
                   'display' => __('statamic-metatags::fieldsets.general:site_name_separator'),
                   'instructions' => __('statamic-metatags::fieldsets.general:site_name_separator:instructions'),
                   'type' => 'text',
-                  'width' => 25,
+                  'width' => 50,
                 ]
               ]
             ]
