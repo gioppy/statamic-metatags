@@ -27,11 +27,22 @@ class MetatagsTags extends Tags {
 
     $page = collect($this->context->get('page'));
 
+    $defaultTitle = $page->only('title')->all();
+
     $fields = Arr::removeNullValues($page
       ->filter(function ($item, $key) use ($settingsMeta) {
         return Str::startsWith($key, $settingsMeta);
       })
-      ->map(function (Value $field, $key) use ($defaultValues) {
+      ->map(function (Value $field, $key) use ($defaultTitle, $defaultValues) {
+        // use default title if the basic_title is null
+        if (is_null($field->raw()) && $key == 'basic_title') {
+          /**
+           * @var Value $title
+           */
+          $title = $defaultTitle['title'];
+          return new Value($title->value(), $title->handle(), $title->fieldtype(), $title->augmentable());
+        }
+
         if (is_null($field->raw()) && array_key_exists($key, $defaultValues)) {
           return new Value($defaultValues[$key], $field->handle(), $field->fieldtype(), $field->augmentable());
         }
