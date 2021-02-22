@@ -6,7 +6,7 @@ namespace Gioppy\StatamicMetatags;
 
 use Illuminate\Support\Collection;
 use Statamic\Facades\File;
-use Statamic\Facades\Yaml;
+use Statamic\Facades\YAML;
 
 class Settings {
 

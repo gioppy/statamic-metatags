@@ -5,10 +5,8 @@ namespace Gioppy\StatamicMetatags\Tags;
 
 
 use Gioppy\StatamicMetatags\DefaultMetatags;
-use Gioppy\StatamicMetatags\Metatags;
 use Gioppy\StatamicMetatags\Settings;
 use Illuminate\Support\Str;
-use Statamic\Facades\Blueprint;
 use Statamic\Fields\Value;
 use Statamic\Support\Arr;
 use Statamic\Tags\Tags;
