@@ -25,31 +25,33 @@ class MetatagsTags extends Tags {
 
     $page = collect($this->context->get('page'));
 
-    $defaultTitle = $page->only('title')->all();
-
-    $fields = Arr::removeNullValues($page
-      ->filter(function ($item, $key) use ($settingsMeta) {
-        return Str::startsWith($key, $settingsMeta);
-      })
-      ->map(function (Value $field, $key) use ($defaultTitle, $defaultValues) {
-        // use default title if the basic_title is null
-        if (is_null($field->raw()) && $key == 'basic_title') {
-          /**
-           * @var Value $title
-           */
-          $title = $defaultTitle['title'];
-          return new Value($title->value(), $title->handle(), $title->fieldtype(), $title->augmentable());
+    $fields = $page->filter(function ($item, $key) use ($settingsMeta) {
+      return Str::startsWith($key, $settingsMeta);
+    })
+      ->filter()
+      ->merge($defaultValues)
+      ->map(function ($field, $key) {
+        // Field with single option
+        if (is_array($field) && array_key_exists('value', $field) && !is_null($field['value'])) {
+          return new Value($field['value']);
         }
 
-        if (is_null($field->raw()) && array_key_exists($key, $defaultValues)) {
-          return new Value($defaultValues[$key], $field->handle(), $field->fieldtype(), $field->augmentable());
+        // Field with multiple options
+        if (is_array($field) && Arr::isList($field)) {
+          return new Value($field);
         }
-        return $field;
-      })
-      ->all());
+
+        return new Value($field);
+      });
+
+    // Check if fields have title, otherwise load default title
+    if (!array_key_exists('basic_title', $fields->all())) {
+      $defaultTitle = $page->only('title')->all();
+      $fields->prepend(new Value($defaultTitle['title']), 'basic_title');
+    }
 
     return view('statamic-metatags::metatags', [
-      'fields' => $fields,
+      'fields' => $fields->all(),
       'settings' => $settingsMeta,
       'extras' => [
         'site_name' => $settingsDefault['site_name'],
