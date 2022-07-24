@@ -25,11 +25,17 @@ class MetatagsTags extends Tags {
 
     $page = collect($this->context->get('page'));
 
-    $fields = $page->filter(function ($item, $key) use ($settingsMeta) {
+    // Get page metatags and remove null values
+    $pageFields = $page->filter(function ($item, $key) use ($settingsMeta) {
       return Str::startsWith($key, $settingsMeta);
     })
       ->filter()
-      ->merge($defaultValues)
+      ->all();
+
+    // Merge default values with page metatags
+    $fields = collect($defaultValues)
+      ->filter()
+      ->merge($pageFields)
       ->map(function ($field, $key) {
         // Field with single option
         if (is_array($field) && array_key_exists('value', $field) && !is_null($field['value'])) {
