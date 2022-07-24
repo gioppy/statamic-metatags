@@ -24,6 +24,16 @@ This is an add-on for Statamic 3. It gives the ability to manage and customize a
 
 If you think that some meta tags are missing, open a PR!
 
+## Installation
+
+If you are on Statamic < 3.3 use the latest release of v1 branch:
+
+```composer require gioppy/statamic-metatags "^1.0.4"```
+
+If you are on Statamic >= 3.3 use v2 branch:
+
+```composer require gioppy/statamic-metatags```
+
 ## How to use
 
 All meta tags are managed through fieldsets: once the necessary categories are activated, the `metatags.yaml` fieldset is created or updated.
