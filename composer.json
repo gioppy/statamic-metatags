@@ -24,6 +24,7 @@
         }
     },
     "require": {
+        "php": "^7.3 || ^8.0",
         "statamic/cms": "^3.3"
     },
     "config": {
