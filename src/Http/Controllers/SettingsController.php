@@ -35,6 +35,8 @@ class SettingsController extends Controller {
     $fields->validate();
 
     $values = Arr::removeNullValues($fields->process()->values()->all());
+    $values['site_name'] = isset($values['site_name']) ? " {$values['site_name']}" : '';
+    $values['site_name_separator'] = isset($values['site_name_separator']) ? " {$values['site_name_separator']} " : '';
 
     Settings::make($values)->save();
 
