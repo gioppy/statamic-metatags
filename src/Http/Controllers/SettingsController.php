@@ -6,6 +6,7 @@ use Gioppy\StatamicMetatags\Metatags;
 use Gioppy\StatamicMetatags\Settings;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Statamic\Facades\AssetContainer;
 use Statamic\Facades\Blueprint;
 use Statamic\Facades\Fieldset;
 use Statamic\Support\Arr;
@@ -45,6 +46,15 @@ class SettingsController extends Controller {
   }
 
   private function blueprint() {
+    /**
+     * @var $assetContainers \Illuminate\Support\Collection
+     */
+    $assetContainers = AssetContainer::all();
+    $assetContainersOptions = $assetContainers->mapWithKeys(function (\Statamic\Assets\AssetContainer $item) {
+      return [$item->url() => $item->title()];
+    })
+      ->toArray();
+
     return Blueprint::make()
       ->setContents([
         'sections' => [
@@ -68,7 +78,21 @@ class SettingsController extends Controller {
                   'type' => 'text',
                   'width' => 50,
                 ]
-              ]
+              ],
+              [
+                'handle' => 'image_asset_container',
+                'field' => [
+                  'display' => __('statamic-metatags::fieldsets.general:image_asset_container'),
+                  'instructions' => __('statamic-metatags::fieldsets.general:image_asset_container:instructions'),
+                  'type' => 'select',
+                  'multiple' => false,
+                  'clearable' => false,
+                  'searchable' => true,
+                  'push_tags' => false,
+                  'cast_booleans' => false,
+                  'options' => $assetContainersOptions
+                ]
+              ],
             ]
           ],
           'meta' => [

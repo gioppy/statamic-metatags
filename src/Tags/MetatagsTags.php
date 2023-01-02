@@ -7,6 +7,7 @@ namespace Gioppy\StatamicMetatags\Tags;
 use Gioppy\StatamicMetatags\DefaultMetatags;
 use Gioppy\StatamicMetatags\Settings;
 use Illuminate\Support\Str;
+use Statamic\Facades\Asset;
 use Statamic\Fields\Value;
 use Statamic\Support\Arr;
 use Statamic\Tags\Tags;
@@ -30,6 +31,13 @@ class MetatagsTags extends Tags {
       return Str::startsWith($key, $settingsMeta);
     })
       ->filter()
+      ->filter(function ($item) {
+        if (is_array($item) && array_key_exists('value', $item) && $item['value'] === null) {
+          return false;
+        }
+
+        return true;
+      })
       ->all();
 
     // Merge default values with page metatags
@@ -37,6 +45,25 @@ class MetatagsTags extends Tags {
       ->filter()
       ->merge($pageFields)
       ->map(function ($field, $key) {
+        // Filed with media
+        if (Str::endsWith($key, ['image', 'video', 'audio'])) {
+          // Default value, it seems that media value from default settings will be a simple string array...
+          if (is_array($field) && array_key_exists(0, $field)) {
+            return collect($field)->map(function ($item) {
+              return is_array($item) ?
+                new Value($item) :
+                new Value(Asset::findByUrl($this->assetContainerPath($item)));
+            })->toArray();
+          }
+
+          // ...otherwise, value from field inside a collection is an Asset!
+          if (is_array($field) && array_key_exists('path', $field)) {
+            return new Value($field);
+          }
+
+          return new Value(Asset::findByUrl($this->assetContainerPath($field)));
+        }
+
         // Field with single option
         if (is_array($field) && array_key_exists('value', $field) && !is_null($field['value'])) {
           return new Value($field['value']);
@@ -65,5 +92,11 @@ class MetatagsTags extends Tags {
         'permalink' => $page->get('permalink')
       ]
     ]);
+  }
+
+  private function assetContainerPath($asset) {
+    $settings = Settings::make();
+    $containerPath = $settings->excludedMeta()['image_asset_container'];
+    return "$containerPath/$asset";
   }
 }

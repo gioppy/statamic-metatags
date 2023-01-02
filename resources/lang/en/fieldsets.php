@@ -7,6 +7,9 @@ return [
   'general:site_name_separator' => 'Site name separator',
   'general:site_name_separator:instructions' => 'The character that separates the title of the site name page.',
 
+  'general:image_asset_container' => 'Asset container',
+  'general:image_asset_container:instructions' => 'The container to use for the images and media.',
+
   'meta:meta_section' => 'Activated Meta tags',
   'meta:meta_section:instructions' => 'Activate all the meta tags you need.',
 

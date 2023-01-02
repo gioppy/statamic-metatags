@@ -39,7 +39,7 @@ class Settings {
 
   public function excludedMeta() {
     return collect(Yaml::file($this->path())->parse())
-      ->only(['site_name', 'site_name_separator'])
+      ->only(['site_name', 'site_name_separator', 'image_asset_container'])
       ->all();
   }
 
