@@ -30,7 +30,11 @@ If you are on Statamic < 3.3 use the latest release of v1 branch:
 
 ```composer require gioppy/statamic-metatags "^1.0.4"```
 
-If you are on Statamic >= 3.3 use v2 branch:
+If you are on Statamic >= 3.3 and < 4.0 use v2 branch:
+
+```composer require gioppy/statamic-metatags "2.0.1"```
+
+If you are on Statamic >= 4.0 use v3 branch
 
 ```composer require gioppy/statamic-metatags```
 
