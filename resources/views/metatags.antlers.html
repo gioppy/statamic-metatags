@@ -16,8 +16,8 @@
   {{ if advanced_generator }}<meta name="generator" content="{{ advanced_generator }}" />{{ /if }}
   {{ if advanced_image }}<link rel="image_src" href="{{ advanced_image.permalink }}">{{ /if }}
   {{ if advanced_rights }}<meta name="copyright" content="{{ advanced_rights }}" />{{ /if }}
-  {{ if advanced_rating }}<meta name="rating" content="{{ advanced_rating }}" />{{ /if }}
-  {{ if advanced_referrer }}<meta name="referrer" content="{{ advanced_referrer }}" />{{ /if }}
+  {{ if advanced_rating }}<meta name="rating" content="{{ advanced_rating.value }}" />{{ /if }}
+  {{ if advanced_referrer }}<meta name="referrer" content="{{ advanced_referrer.value }}" />{{ /if }}
   {{ if advanced_short_link }}<link rel="shortlink" href="{{ advanced_short_link }}" />{{ /if }}
   {{ if advanced_original_source }}<link rel="original-source" href="{{ advanced_original_source }}" />{{ /if }}
   {{ if advanced_geo_position }}<meta name="geo.position" content="{{ advanced_geo_position }}" />{{ /if }}
@@ -52,7 +52,7 @@
   {{ if dublin_core_publisher }}<meta name="dcterms.publisher" content="{{ dublin_core_publisher }}" />{{ /if }}
   {{ if dublin_core_contributor }}<meta name="dcterms.contributor" content="{{ dublin_core_contributor }}" />{{ /if }}
   {{ if dublin_core_date }}<meta name="dcterms.date" content="{{ dublin_core_date format='c' }}" />{{ /if }}
-  {{ if dublin_core_type }}<meta name="dcterms.type" content="{{ dublin_core_type }}" />{{ /if }}
+  {{ if dublin_core_type }}<meta name="dcterms.type" content="{{ dublin_core_type.value }}" />{{ /if }}
   {{ if dublin_core_format }}<meta name="dcterms.format" content="{{ dublin_core_format }}" />{{ /if }}
   {{ if dublin_core_identifier }}<meta name="dcterms.identifier" content="{{ dublin_core_identifier }}" />{{ /if }}
   {{ if dublin_core_source }}<meta name="dcterms.source" content="{{ dublin_core_source }}" />{{ /if }}
@@ -112,9 +112,9 @@
 <!-- OPEN GRAPH -->
 <meta property="og:site_name" content="{{ extras.site_name }}">
 {{ fields }}
-  {{ if og_type }}<meta property="og:type" content="{{ og_type }}" />{{ /if }}
+  {{ if og_type }}<meta property="og:type" content="{{ og_type.value }}" />{{ /if }}
   <meta property="og:title" content="{{ og_title ?? basic_title }}" />
-  {{ if og_determiner }}<meta property="og:determiner" content="{{ og_determiner }}" />{{ /if }}
+  {{ if og_determiner }}<meta property="og:determiner" content="{{ og_determiner.value }}" />{{ /if }}
   {{ if og_description }}<meta property="og:description" content="{{ og_description }}" />{{ /if }}
   {{ if og_image }}
     {{ foreach:og_image as="ogimage" }}
@@ -140,7 +140,7 @@
     {{ /foreach:og_video }}
   {{ /if }}
 
-  {{ if og_type == 'article' }}
+  {{ if og_type.value == 'article' }}
     {{ if og_article_author }}
       {{ og_article_author }}
       <meta property="article:author" content="{{ value }}" />
@@ -157,7 +157,7 @@
     {{ if og_article_expiration_time }}<meta property="article:expiration_time" content="{{ og_article_expiration_time format='c' }}" />{{ /if }}
   {{ /if }}
 
-  {{ if og_type == 'book' }}
+  {{ if og_type.value == 'book' }}
     {{ if og_book_author }}
       {{ og_book_author }}
       <meta property="book:author" content="{{ value }}" />
@@ -172,14 +172,14 @@
     {{ /if }}
   {{ /if }}
 
-  {{ if og_type == 'profile' }}
+  {{ if og_type.value == 'profile' }}
     {{ if og_profile_first_name }}<meta property="profile:first_name" content="{{ og_profile_first_name }}" />{{ /if }}
     {{ if og_profile_last_name }}<meta property="profile:last_name" content="{{ og_profile_last_name }}" />{{ /if }}
     {{ if og_profile_username }}<meta property="profile:username" content="{{ og_profile_username }}" />{{ /if }}
-    {{ if og_profile_gender }}<meta property="profile:gender" content="{{ og_profile_gender }}" />{{ /if }}
+    {{ if og_profile_gender }}<meta property="profile:gender" content="{{ og_profile_gender.value }}" />{{ /if }}
   {{ /if }}
 
-  {{ if og_type | contains:video }}
+  {{ if og_type.value | contains:video }}
     {{ if og_video_actor }}
       {{ og_video_actor }}
       <meta property="video:actor" content="{{ value }}" />
@@ -207,12 +207,12 @@
       <meta property="video:tag" content="{{ value }}" />
       {{ /og_video_tag }}
     {{ /if }}
-    {{ if og_type == 'video.episode' }}
+    {{ if og_type.value == 'video.episode' }}
       {{ if og_video_series }}<meta property="video:series" content="{{ og_video_series }}" />{{ /if }}
     {{ /if }}
   {{ /if }}
 
-  {{ if og_type | contains:music }}
+  {{ if og_type.value | contains:music }}
     {{ if og_type == 'music.song' }}
       {{ if og_music_duration }}<meta property="music:duration" content="{{ og_music_duration }}" />{{ /if }}
       {{ if og_music_album }}
@@ -229,7 +229,7 @@
       {{ /if }}
     {{ /if }}
 
-    {{ if og_type == 'music.album' }}
+    {{ if og_type.value == 'music.album' }}
       {{ if og_music_song }}<meta property="music:song" content="{{ og_music_song }}" />{{ /if }}
       {{ if og_music_song_disc }}<meta property="music:song:disc" content="{{ og_music_song_disc }}" />{{ /if }}
       {{ if og_music_song_track }}<meta property="music:song:track" content="{{ og_music_song_track }}" />{{ /if }}
@@ -241,19 +241,19 @@
       {{ if og_music_release_date }}<meta property="music:release_date" content="{{ og_music_release_date format='c' }}" />{{ /if }}
     {{ /if }}
 
-    {{ if og_type == 'music.playlist' }}
+    {{ if og_type.value == 'music.playlist' }}
       {{ if og_music_song }}<meta property="music:song" content="{{ og_music_song }}" />{{ /if }}
       {{ if og_music_song_disc }}<meta property="music:song:disc" content="{{ og_music_song_disc }}" />{{ /if }}
       {{ if og_music_song_track }}<meta property="music:song:track" content="{{ og_music_song_track }}" />{{ /if }}
       {{ if og_music_creator }}<meta property="music:creator" content="{{ og_music_creator }}" />{{ /if }}
     {{ /if }}
 
-    {{ if og_type == 'music.radio_station' }}
+    {{ if og_type.value == 'music.radio_station' }}
       {{ if og_music_creator }}<meta property="music:creator" content="{{ og_music_creator }}" />{{ /if }}
     {{ /if }}
   {{ /if }}
 
-  {{ if og_type == 'product' }}
+  {{ if og_type.value == 'product' }}
     {{ if og_product_plural_title }}<meta property="product:plural_title" content="{{ og_product_plural_title }}" />{{ /if }}
     {{ if og_product_price_amount }}
       {{ og_product_price_amount }}
@@ -299,13 +299,13 @@
   {{ if pinterest_rating_scale }}<meta property="og:rating_scale" content="{{ pinterest_rating_scale }}" />{{ /if }}
   {{ if pinterest_rating_count }}<meta property="og:rating_count" content="{{ pinterest_rating_count }}" />{{ /if }}
 
-  {{ if pinterest_type == 'article' }}
+  {{ if pinterest_type.value == 'article' }}
     {{ if pinterest_modified_time }}<meta property="article:modified_time" content="{{ pinterest_modified_time format='c' }}" />{{ /if }}
     {{ if pinterest_section }}<meta property="article:section" content="{{ pinterest_section }}" />{{ /if }}
     {{ if pinterest_tag }}<meta property="article:tag" content="{{ pinterest_tag | join }}" />{{ /if }}
   {{ /if }}
 
-  {{ if pinterest_type == 'product' }}
+  {{ if pinterest_type.value == 'product' }}
     {{ if pinterest_start_date }}<meta property="og:price:start_date" content="{{ pinterest_start_date format='c' }}" />{{ /if }}
     {{ if pinterest_end_date }}<meta property="og:price:end_date" content="{{ pinterest_end_date format='c' }}" />{{ /if }}
     {{ if pinterest_code_type && pinterest_code_id }}<meta property="{{ pinterest_code_type }}" content="{{ pinterest_code_id }}" />{{ /if }}
@@ -336,8 +336,8 @@
 {{ if settings | in_array:twitter }}
 <!-- TWITTER -->
 {{ fields }}
-  {{ if twitter_type }}<meta property="twitter:card" content="{{ twitter_type }}" />{{ /if }}
-  {{ if twitter_type == 'summary' }}
+  {{ if twitter_type }}<meta property="twitter:card" content="{{ twitter_type.value }}" />{{ /if }}
+  {{ if twitter_type.value == 'summary' }}
     {{ if twitter_site }}<meta property="twitter:site" content="{{ twitter_site }}" />{{ /if }}
     {{ if twitter_site_id }}<meta property="twitter:site:id" content="{{ twitter_site_id }}" />{{ /if }}
     {{ if twitter_creator }}<meta property="twitter:creator" content="{{ twitter_creator }}" />{{ /if }}
@@ -351,13 +351,13 @@
       {{ /twitter_image }}
     {{ /if }}
   {{ /if }}
-  {{ if twitter_type == 'player' }}
+  {{ if twitter_type.value == 'player' }}
     {{ if twitter_player }}<meta property="twitter:player" content="{{ twitter_player }}" />{{ /if }}
     {{ if twitter_player_width }}<meta property="twitter:player:width" content="{{ twitter_player_width }}" />{{ /if }}
     {{ if twitter_player_height }}<meta property="twitter:player:height" content="{{ twitter_player_height }}" />{{ /if }}
     {{ if twitter_player_stream }}<meta property="twitter:player:stream" content="{{ twitter_player_stream }}" />{{ /if }}
   {{ /if }}
-  {{ if twitter_type == 'app' }}
+  {{ if twitter_type.value == 'app' }}
     {{ if twitter_app_name_iphone }}<meta property="twitter:app:name:iphone" content="{{ twitter_app_name_iphone }}" />{{ /if }}
     {{ if twitter_app_id_iphone }}<meta property="twitter:app:id:iphone" content="{{ twitter_app_id_iphone }}" />{{ /if }}
     {{ if twitter_app_url_iphone }}<meta property="twitter:app:url:iphone" content="{{ twitter_app_url_iphone }}" />{{ /if }}
@@ -415,7 +415,7 @@
 {{ fields }}
   {{ if apple_format_detection }}<meta name="format-detection" content="{{ apple_format_detection | join }}" />{{ /if }}
   {{ if apple_apple_itunes_app }}<meta name="apple-itunes-app" content="{{ apple_apple_itunes_app }}" />{{ /if }}
-  {{ if apple_apple_mobile_web_app_capable }}<meta name="apple-mobile-web-app-capable" content="{{ apple_apple_mobile_web_app_capable }}" />{{ /if }}
+  {{ if apple_apple_mobile_web_app_capable }}<meta name="apple-mobile-web-app-capable" content="{{ apple_apple_mobile_web_app_capable.value }}" />{{ /if }}
   {{ if apple_apple_mobile_web_app_status_bar_style }}<meta name="apple-mobile-web-app-status-bar-style" content="{{ apple_apple_mobile_web_app_status_bar_style }}" />{{ /if }}
 {{ /fields }}
 {{ /if }}
@@ -431,9 +431,11 @@
 {{ if settings | in_array:favicons }}
 <!-- FAVICONS -->
 {{ fields }}
-  {{ if favicons_mask_icon }}<link rel="mask-icon" href="{{ favicons_mask_icon.url }}"{{ if favicons_mask_icon_color }} color="{{ favicons_mask_icon_color }}"{{ /if }} />{{ /if }}
-  {{ if favicons_apple_touch_icon }}<link rel="apple-touch-icon" sizes="180x180" href="{{ favicons_apple_touch_icon.url }}">{{ /if }}
-  {{ if favicons_icon_16 }}<link rel="icon" type="image/png" sizes="16x16" href="{{ favicons_icon_16.url }}">{{ /if }}
-  {{ if favicons_icon_32 }}<link rel="icon" type="image/png" sizes="32x32" href="{{ favicons_icon_32.url }}">{{ /if }}
+  {{ if favicons_mask_icon }}
+    <link rel="mask-icon" href="{{ favicons_mask_icon }}"{{ if favicons_mask_icon_color }} color="{{ favicons_mask_icon_color }}"{{ /if }} />
+  {{ /if }}
+  {{ if favicons_apple_touch_icon }}<link rel="apple-touch-icon" sizes="180x180" href="{{ favicons_apple_touch_icon }}">{{ /if }}
+  {{ if favicons_icon_16 }}<link rel="icon" type="image/png" sizes="16x16" href="{{ favicons_icon_16 }}">{{ /if }}
+  {{ if favicons_icon_32 }}<link rel="icon" type="image/png" sizes="32x32" href="{{ favicons_icon_32 }}">{{ /if }}
 {{ /fields }}
 {{ /if }}
