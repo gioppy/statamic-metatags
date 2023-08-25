@@ -2031,8 +2031,8 @@ class Metatags {
       [
         'handle' => 'app_links_iphone_app_store_id',
         'field' => [
-          'display' => __('statamic-metatags::app_links.app_store_id'),
-          'instructions' => __('statamic-metatags::app_links.app_store_id_instructions'),
+          'display' => __('statamic-metatags::app_links.iphone_app_store_id'),
+          'instructions' => __('statamic-metatags::app_links.iphone_app_store_id_instructions'),
           'type' => 'text',
         ]
       ],

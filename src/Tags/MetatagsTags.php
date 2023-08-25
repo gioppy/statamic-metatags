@@ -7,7 +7,6 @@ namespace Gioppy\StatamicMetatags\Tags;
 use Gioppy\StatamicMetatags\DefaultMetatags;
 use Gioppy\StatamicMetatags\Settings;
 use Illuminate\Support\Str;
-use Statamic\Facades\Asset;
 use Statamic\Fields\Value;
 use Statamic\Support\Arr;
 use Statamic\Tags\Tags;
@@ -22,7 +21,7 @@ class MetatagsTags extends Tags {
     $settingsMeta = $settings->onlyMeta();
     $settingsDefault = $settings->excludedMeta();
 
-    $defaultValues = Arr::removeNullValues(DefaultMetatags::make()->values());
+    $defaultValues = Arr::removeNullValues(DefaultMetatags::make()->augmented());
 
     $page = collect($this->context->get('page'));
 
@@ -43,39 +42,7 @@ class MetatagsTags extends Tags {
     // Merge default values with page metatags
     $fields = collect($defaultValues)
       ->filter()
-      ->merge($pageFields)
-      ->map(function ($field, $key) {
-        // Filed with media
-        if (Str::endsWith($key, ['image', 'video', 'audio'])) {
-          // Default value, it seems that media value from default settings will be a simple string array...
-          if (is_array($field) && array_key_exists(0, $field)) {
-            return collect($field)->map(function ($item) {
-              return is_array($item) ?
-                new Value($item) :
-                new Value(Asset::findByUrl($this->assetContainerPath($item)));
-            })->toArray();
-          }
-
-          // ...otherwise, value from field inside a collection is an Asset!
-          if (is_array($field) && array_key_exists('path', $field)) {
-            return new Value($field);
-          }
-
-          return new Value(Asset::findByUrl($this->assetContainerPath($field)));
-        }
-
-        // Field with single option
-        if (is_array($field) && array_key_exists('value', $field) && !is_null($field['value'])) {
-          return new Value($field['value']);
-        }
-
-        // Field with multiple options
-        if (is_array($field) && Arr::isList($field)) {
-          return new Value($field);
-        }
-
-        return new Value($field);
-      });
+      ->merge($pageFields);
 
     // Check if fields have title, otherwise load default title
     if (!array_key_exists('basic_title', $fields->all())) {
@@ -92,11 +59,5 @@ class MetatagsTags extends Tags {
         'permalink' => $page->get('permalink')
       ]
     ]);
-  }
-
-  private function assetContainerPath($asset) {
-    $settings = Settings::make();
-    $containerPath = $settings->excludedMeta()['image_asset_container'];
-    return "$containerPath/$asset";
   }
 }
