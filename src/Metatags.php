@@ -5,6 +5,7 @@ namespace Gioppy\StatamicMetatags;
 
 
 use Illuminate\Support\Str;
+use Statamic\Facades\Site;
 
 class Metatags {
 
@@ -29,21 +30,23 @@ class Metatags {
       ->collapse()
       ->all();
 
+    $hasMultisite = Site::hasMultiple();
+
     foreach ($features as $feature) {
       $method = Str::camel($feature);
-      $this->fields = $this->fields->merge($this->$method()->get());
+      $this->fields = $this->fields->merge($this->$method($hasMultisite)->get());
     }
 
     return $this->fields->values()->all();
   }
 
-  protected function basic() {
+  protected function basic(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'basic',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.basic'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -52,6 +55,7 @@ class Metatags {
           'display' => __('statamic-metatags::basic.title'),
           'instructions' => __('statamic-metatags::basic.title_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -60,6 +64,7 @@ class Metatags {
           'display' => __('statamic-metatags::basic.description'),
           'instructions' => __('statamic-metatags::basic.description_instructions'),
           'type' => 'textarea',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -68,6 +73,7 @@ class Metatags {
           'display' => __('statamic-metatags::basic.keywords'),
           'instructions' => __('statamic-metatags::basic.keywords_instructions'),
           'type' => 'taggable',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -88,6 +94,7 @@ class Metatags {
           'multiple' => true,
           'clearable' => true,
           'type' => 'select',
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -95,13 +102,13 @@ class Metatags {
     return $this;
   }
 
-  protected function advanced() {
+  protected function advanced(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'advanced',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.advanced'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -110,6 +117,7 @@ class Metatags {
           'display' => __('statamic-metatags::advanced.author'),
           'instructions' => __('statamic-metatags::advanced.author_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -118,6 +126,7 @@ class Metatags {
           'display' => __('statamic-metatags::advanced.generator'),
           'instructions' => __('statamic-metatags::advanced.generator_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -130,7 +139,8 @@ class Metatags {
           'restrict' => false,
           'allow_uploads' => true,
           'max_files' => 1,
-          'type' => 'assets'
+          'type' => 'assets',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -139,6 +149,7 @@ class Metatags {
           'display' => __('statamic-metatags::advanced.rights'),
           'instructions' => __('statamic-metatags::advanced.rights_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -155,6 +166,7 @@ class Metatags {
           ],
           'clearable' => true,
           'type' => 'select',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -171,6 +183,7 @@ class Metatags {
           ],
           'clearable' => true,
           'type' => 'select',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -179,6 +192,7 @@ class Metatags {
           'display' => __('statamic-metatags::advanced.canonical'),
           'instructions' => __('statamic-metatags::advanced.canonical_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -188,6 +202,7 @@ class Metatags {
           'instructions' => __('statamic-metatags::advanced.short_link_instructions'),
           'type' => 'text',
           'input_type' => 'url',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -196,6 +211,7 @@ class Metatags {
           'display' => __('statamic-metatags::advanced.original_source'),
           'instructions' => __('statamic-metatags::advanced.original_source_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -204,6 +220,7 @@ class Metatags {
           'display' => __('statamic-metatags::advanced.geo_position'),
           'instructions' => __('statamic-metatags::advanced.geo_position_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -212,6 +229,7 @@ class Metatags {
           'display' => __('statamic-metatags::advanced.geo_placename'),
           'instructions' => __('statamic-metatags::advanced.geo_placename_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -220,6 +238,7 @@ class Metatags {
           'display' => __('statamic-metatags::advanced.geo_region'),
           'instructions' => __('statamic-metatags::advanced.geo_region_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -228,6 +247,7 @@ class Metatags {
           'display' => __('statamic-metatags::advanced.icbm'),
           'instructions' => __('statamic-metatags::advanced.icbm_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -236,6 +256,7 @@ class Metatags {
           'display' => __('statamic-metatags::advanced.refresh'),
           'instructions' => __('statamic-metatags::advanced.refresh_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ]
     ];
@@ -243,13 +264,13 @@ class Metatags {
     return $this;
   }
 
-  protected function siteVerifications() {
+  protected function siteVerifications(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'site_verifications',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.site_verifications'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -258,6 +279,7 @@ class Metatags {
           'display' => __('statamic-metatags::site_verifications.bing'),
           'instructions' => __('statamic-metatags::site_verifications.bing_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -266,6 +288,7 @@ class Metatags {
           'display' => __('statamic-metatags::site_verifications.baidu'),
           'instructions' => __('statamic-metatags::site_verifications.baidu_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -274,6 +297,7 @@ class Metatags {
           'display' => __('statamic-metatags::site_verifications.google'),
           'instructions' => __('statamic-metatags::site_verifications.google_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -282,6 +306,7 @@ class Metatags {
           'display' => __('statamic-metatags::site_verifications.norton'),
           'instructions' => __('statamic-metatags::site_verifications.norton_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -290,6 +315,7 @@ class Metatags {
           'display' => __('statamic-metatags::site_verifications.pinterest'),
           'instructions' => __('statamic-metatags::site_verifications.pinterest_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -298,6 +324,7 @@ class Metatags {
           'display' => __('statamic-metatags::site_verifications.pocket'),
           'instructions' => __('statamic-metatags::site_verifications.pocket_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -306,6 +333,7 @@ class Metatags {
           'display' => __('statamic-metatags::site_verifications.yandex'),
           'instructions' => __('statamic-metatags::site_verifications.yandex_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -314,6 +342,7 @@ class Metatags {
           'display' => __('statamic-metatags::site_verifications.zoom'),
           'instructions' => __('statamic-metatags::site_verifications.zoom_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -321,13 +350,13 @@ class Metatags {
     return $this;
   }
 
-  protected function dublinCore() {
+  protected function dublinCore(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'dublin_core',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.dublin_core'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -336,6 +365,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.title'),
           'instructions' => __('statamic-metatags::dc.title_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -344,6 +374,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.creator'),
           'instructions' => __('statamic-metatags::dc.creator_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -352,6 +383,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.subject'),
           'instructions' => __('statamic-metatags::dc.subject_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -360,6 +392,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.description'),
           'instructions' => __('statamic-metatags::dc.description_instructions'),
           'type' => 'textarea',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -368,6 +401,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.publisher'),
           'instructions' => __('statamic-metatags::dc.publisher_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -376,6 +410,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.contributor'),
           'instructions' => __('statamic-metatags::dc.contributor_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -385,6 +420,7 @@ class Metatags {
           'instructions' => __('statamic-metatags::dc.date_instructions'),
           'time_enabled' => true,
           'type' => 'date',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -404,10 +440,11 @@ class Metatags {
             'Software' => 'Software',
             'Sound' => 'Sound',
             'StillImage' => 'Still Image',
-            'Text' => 'Text'
+            'Text' => 'Text',
           ],
           'type' => 'select',
           'clearable' => true,
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -416,6 +453,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.format'),
           'instructions' => __('statamic-metatags::dc.format_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -424,6 +462,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.identifier'),
           'instructions' => __('statamic-metatags::dc.identifier_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -432,6 +471,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.source'),
           'instructions' => __('statamic-metatags::dc.source_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -440,6 +480,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.language'),
           'instructions' => __('statamic-metatags::dc.language_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -448,6 +489,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.relation'),
           'instructions' => __('statamic-metatags::dc.relation_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -456,6 +498,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.coverage'),
           'instructions' => __('statamic-metatags::dc.coverage_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -464,6 +507,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.rights'),
           'instructions' => __('statamic-metatags::dc.rights_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -471,13 +515,13 @@ class Metatags {
     return $this;
   }
 
-  protected function dublinCoreAdvanced() {
+  protected function dublinCoreAdvanced(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'dublin_core_advanced',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.dublin_core_advanced'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -486,6 +530,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.abstract'),
           'instructions' => __('statamic-metatags::dc.abstract_instructions'),
           'type' => 'textarea',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -494,6 +539,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.access_rights'),
           'instructions' => __('statamic-metatags::dc.access_rights_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -502,6 +548,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.accrual_method'),
           'instructions' => __('statamic-metatags::dc.accrual_method_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -510,6 +557,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.accrual_periodicity'),
           'instructions' => __('statamic-metatags::dc.accrual_periodicity_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -518,6 +566,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.accrual_policy'),
           'instructions' => __('statamic-metatags::dc.accrual_policy_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -526,6 +575,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.alternative'),
           'instructions' => __('statamic-metatags::dc.alternative_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -534,6 +584,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.audience'),
           'instructions' => __('statamic-metatags::dc.audience_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -542,6 +593,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.available'),
           'instructions' => __('statamic-metatags::dc.available_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -550,6 +602,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.bibliographic_citation'),
           'instructions' => __('statamic-metatags::dc.bibliographic_citation_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -558,6 +611,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.conforms_to'),
           'instructions' => __('statamic-metatags::dc.conforms_to_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -566,6 +620,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.created'),
           'instructions' => __('statamic-metatags::dc.created_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -574,6 +629,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.date_accepted'),
           'instructions' => __('statamic-metatags::dc.date_accepted_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -582,6 +638,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.date_copyrighted'),
           'instructions' => __('statamic-metatags::dc.date_copyrighted_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -590,6 +647,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.date_submitted'),
           'instructions' => __('statamic-metatags::dc.date_submitted_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -598,6 +656,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.education_level'),
           'instructions' => __('statamic-metatags::dc.education_level_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -606,6 +665,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.extent'),
           'instructions' => __('statamic-metatags::dc.extent_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -614,6 +674,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.has_format'),
           'instructions' => __('statamic-metatags::dc.has_format_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -622,6 +683,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.has_part'),
           'instructions' => __('statamic-metatags::dc.has_part_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -630,6 +692,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.has_version'),
           'instructions' => __('statamic-metatags::dc.has_version_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -638,6 +701,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.instructional_method'),
           'instructions' => __('statamic-metatags::dc.instructional_method_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -646,6 +710,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.is_format_of'),
           'instructions' => __('statamic-metatags::dc.is_format_of_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -654,6 +719,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.is_part_of'),
           'instructions' => __('statamic-metatags::dc.is_part_of_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -662,6 +728,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.is_referenced_by'),
           'instructions' => __('statamic-metatags::dc.is_referenced_by_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -670,6 +737,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.is_replaced_by'),
           'instructions' => __('statamic-metatags::dc.is_replaced_by_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -678,6 +746,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.is_required_by'),
           'instructions' => __('statamic-metatags::dc.is_required_by_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -686,6 +755,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.issued'),
           'instructions' => __('statamic-metatags::dc.issued_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -694,6 +764,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.is_version_of'),
           'instructions' => __('statamic-metatags::dc.is_version_of_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -702,6 +773,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.license'),
           'instructions' => __('statamic-metatags::dc.license_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -710,6 +782,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.mediator'),
           'instructions' => __('statamic-metatags::dc.mediator_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -718,6 +791,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.medium'),
           'instructions' => __('statamic-metatags::dc.medium_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -726,6 +800,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.modified'),
           'instructions' => __('statamic-metatags::dc.modified_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -734,6 +809,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.provenance'),
           'instructions' => __('statamic-metatags::dc.provenance_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -742,6 +818,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.references'),
           'instructions' => __('statamic-metatags::dc.references_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -750,6 +827,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.replaces'),
           'instructions' => __('statamic-metatags::dc.replaces_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -758,6 +836,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.requires'),
           'instructions' => __('statamic-metatags::dc.requires_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -766,6 +845,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.rights_holder'),
           'instructions' => __('statamic-metatags::dc.rights_holder_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -774,6 +854,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.spatial'),
           'instructions' => __('statamic-metatags::dc.spatial_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -782,6 +863,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.table_of_contents'),
           'instructions' => __('statamic-metatags::dc.table_of_contents_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -790,6 +872,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.temporal'),
           'instructions' => __('statamic-metatags::dc.temporal_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -798,6 +881,7 @@ class Metatags {
           'display' => __('statamic-metatags::dc.valid'),
           'instructions' => __('statamic-metatags::dc.valid_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -805,13 +889,13 @@ class Metatags {
     return $this;
   }
 
-  protected function googlePlus() {
+  protected function googlePlus(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'google_plus',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.google_plus'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -828,10 +912,11 @@ class Metatags {
             'Organization' => 'Organization',
             'Person' => 'Person',
             'Product' => 'Product',
-            'Review' => 'Review'
+            'Review' => 'Review',
           ],
           'clearable' => true,
           'type' => 'select',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -840,6 +925,7 @@ class Metatags {
           'display' => __('statamic-metatags::google_plus.itemprop_name'),
           'instructions' => __('statamic-metatags::google_plus.itemprop_name_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -848,6 +934,7 @@ class Metatags {
           'display' => __('statamic-metatags::google_plus.itemprop_description'),
           'instructions' => __('statamic-metatags::google_plus.itemprop_description_instructions'),
           'type' => 'textarea',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -857,6 +944,7 @@ class Metatags {
           'instructions' => __('statamic-metatags::google_plus.publisher_instructions'),
           'input_type' => 'url',
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -864,13 +952,13 @@ class Metatags {
     return $this;
   }
 
-  protected function googleCSE() {
+  protected function googleCSE(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'google_cse',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.google_cse'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -879,6 +967,7 @@ class Metatags {
           'display' => __('statamic-metatags::google_cse.department'),
           'instructions' => __('statamic-metatags::google_cse.department_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -887,6 +976,7 @@ class Metatags {
           'display' => __('statamic-metatags::google_cse.audience'),
           'instructions' => __('statamic-metatags::google_cse.audience_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -895,6 +985,7 @@ class Metatags {
           'display' => __('statamic-metatags::google_cse.doc_status'),
           'instructions' => __('statamic-metatags::google_cse.doc_status_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -904,6 +995,7 @@ class Metatags {
           'instructions' => __('statamic-metatags::google_cse.google_rating_instructions'),
           'input_type' => 'number',
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -911,13 +1003,13 @@ class Metatags {
     return $this;
   }
 
-  protected function og() {
+  protected function og(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'og',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.og'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -943,6 +1035,7 @@ class Metatags {
           'clearable' => true,
           'searchable' => true,
           'type' => 'select',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -951,6 +1044,7 @@ class Metatags {
           'display' => __('statamic-metatags::og.title'),
           'instructions' => __('statamic-metatags::og.title_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -962,7 +1056,8 @@ class Metatags {
           'container' => 'assets',
           'restrict' => false,
           'allow_uploads' => true,
-          'type' => 'assets'
+          'type' => 'assets',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -974,7 +1069,8 @@ class Metatags {
           'container' => 'assets',
           'restrict' => false,
           'allow_uploads' => true,
-          'type' => 'assets'
+          'type' => 'assets',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -986,7 +1082,8 @@ class Metatags {
           'container' => 'assets',
           'restrict' => false,
           'allow_uploads' => true,
-          'type' => 'assets'
+          'type' => 'assets',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1002,6 +1099,7 @@ class Metatags {
           ],
           'clearable' => true,
           'type' => 'select',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1010,6 +1108,7 @@ class Metatags {
           'display' => __('statamic-metatags::og.description'),
           'instructions' => __('statamic-metatags::og.description_instructions'),
           'type' => 'textarea',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1018,6 +1117,7 @@ class Metatags {
           'display' => __('statamic-metatags::og.locale_alternate'),
           'instructions' => __('statamic-metatags::og.locale_alternate_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1027,8 +1127,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.article_author_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'equals article'
+            'og_type' => 'equals article',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1038,8 +1139,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.article_section_instructions'),
           'type' => 'text',
           'if' => [
-            'og_type' => 'equals article'
+            'og_type' => 'equals article',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1049,8 +1151,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.article_tag_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'equals article'
+            'og_type' => 'equals article',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1061,8 +1164,9 @@ class Metatags {
           'time_enabled' => true,
           'type' => 'date',
           'if' => [
-            'og_type' => 'equals article'
+            'og_type' => 'equals article',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1073,8 +1177,9 @@ class Metatags {
           'time_enabled' => true,
           'type' => 'date',
           'if' => [
-            'og_type' => 'equals article'
+            'og_type' => 'equals article',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1085,8 +1190,9 @@ class Metatags {
           'time_enabled' => true,
           'type' => 'date',
           'if' => [
-            'og_type' => 'equals article'
+            'og_type' => 'equals article',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1096,8 +1202,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.video_actor_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'contains video.'
+            'og_type' => 'contains video.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1107,8 +1214,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.video_actor_role_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'contains video.'
+            'og_type' => 'contains video.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1118,8 +1226,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.video_director_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'contains video.'
+            'og_type' => 'contains video.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1129,8 +1238,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.video_writer_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'contains video.'
+            'og_type' => 'contains video.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1141,8 +1251,9 @@ class Metatags {
           'input_type' => 'number',
           'type' => 'text',
           'if' => [
-            'og_type' => 'contains video.'
+            'og_type' => 'contains video.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1153,8 +1264,9 @@ class Metatags {
           'time_enabled' => false,
           'type' => 'date',
           'if' => [
-            'og_type' => 'contains video.'
+            'og_type' => 'contains video.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1164,8 +1276,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.video_tag_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'contains video.'
+            'og_type' => 'contains video.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1175,8 +1288,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.video_series_instructions'),
           'type' => 'text',
           'if' => [
-            'og_type' => 'equals video.episode'
+            'og_type' => 'equals video.episode',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1186,8 +1300,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.book_author_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'equals book'
+            'og_type' => 'equals book',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1197,8 +1312,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.book_isbn_instructions'),
           'type' => 'text',
           'if' => [
-            'og_type' => 'equals book'
+            'og_type' => 'equals book',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1209,8 +1325,9 @@ class Metatags {
           'time_enabled' => false,
           'type' => 'date',
           'if' => [
-            'og_type' => 'equals book'
+            'og_type' => 'equals book',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1220,8 +1337,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.book_tag_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'equals book'
+            'og_type' => 'equals book',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1231,8 +1349,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.profile_first_name_instructions'),
           'type' => 'text',
           'if' => [
-            'og_type' => 'equals profile'
+            'og_type' => 'equals profile',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1242,8 +1361,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.profile_last_name_instructions'),
           'type' => 'text',
           'if' => [
-            'og_type' => 'equals profile'
+            'og_type' => 'equals profile',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1253,8 +1373,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.profile_username_instructions'),
           'type' => 'text',
           'if' => [
-            'og_type' => 'equals profile'
+            'og_type' => 'equals profile',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1269,8 +1390,9 @@ class Metatags {
           'clearable' => true,
           'type' => 'select',
           'if' => [
-            'og_type' => 'equals profile'
+            'og_type' => 'equals profile',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1280,8 +1402,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.product_plural_title_instructions'),
           'type' => 'text',
           'if' => [
-            'og_type' => 'equals product'
+            'og_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1291,8 +1414,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.product_price_amount_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'equals product'
+            'og_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1302,8 +1426,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.product_price_currency_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'equals product'
+            'og_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1314,8 +1439,9 @@ class Metatags {
           'type' => 'text',
           'input_type' => 'number',
           'if' => [
-            'og_type' => 'contains music.'
+            'og_type' => 'contains music.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1325,8 +1451,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.music_album_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'contains music.'
+            'og_type' => 'contains music.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1337,8 +1464,9 @@ class Metatags {
           'type' => 'text',
           'input_type' => 'number',
           'if' => [
-            'og_type' => 'contains music.'
+            'og_type' => 'contains music.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1349,8 +1477,9 @@ class Metatags {
           'type' => 'text',
           'input_type' => 'number',
           'if' => [
-            'og_type' => 'contains music.'
+            'og_type' => 'contains music.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1360,8 +1489,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.music_musician_instructions'),
           'type' => 'taggable',
           'if' => [
-            'og_type' => 'contains music.'
+            'og_type' => 'contains music.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1371,8 +1501,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.music_song_instructions'),
           'type' => 'text',
           'if' => [
-            'og_type' => 'contains music.'
+            'og_type' => 'contains music.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1383,8 +1514,9 @@ class Metatags {
           'type' => 'text',
           'input_type' => 'number',
           'if' => [
-            'og_type' => 'contains music.'
+            'og_type' => 'contains music.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1395,8 +1527,9 @@ class Metatags {
           'type' => 'text',
           'input_type' => 'number',
           'if' => [
-            'og_type' => 'contains music.'
+            'og_type' => 'contains music.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1407,8 +1540,9 @@ class Metatags {
           'time_enabled' => false,
           'type' => 'date',
           'if' => [
-            'og_type' => 'contains music.'
+            'og_type' => 'contains music.',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1418,8 +1552,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::og.music_creator_instructions'),
           'type' => 'text',
           'if' => [
-            'og_type' => 'contains music.'
+            'og_type' => 'contains music.',
           ],
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -1427,13 +1562,13 @@ class Metatags {
     return $this;
   }
 
-  protected function facebook() {
+  protected function facebook(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'facebook',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.facebook'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -1442,6 +1577,7 @@ class Metatags {
           'display' => __('statamic-metatags::facebook.admins'),
           'instructions' => __('statamic-metatags::facebook.admins_instructions'),
           'type' => 'taggable',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1450,6 +1586,7 @@ class Metatags {
           'display' => __('statamic-metatags::facebook.app_id'),
           'instructions' => __('statamic-metatags::facebook.app_id_instructions'),
           'type' => 'taggable',
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -1457,13 +1594,13 @@ class Metatags {
     return $this;
   }
 
-  protected function twitter() {
+  protected function twitter(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'twitter',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.twitter'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -1480,6 +1617,7 @@ class Metatags {
           'clearable' => true,
           'searchable' => true,
           'type' => 'select',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1488,6 +1626,7 @@ class Metatags {
           'display' => __('statamic-metatags::twitter.site'),
           'instructions' => __('statamic-metatags::twitter.site_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1497,8 +1636,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.site_id_instructions'),
           'type' => 'text',
           'if' => [
-            'twitter_type' => 'not app'
+            'twitter_type' => 'not app',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1508,8 +1648,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.creator_instructions'),
           'type' => 'text',
           'if' => [
-            'twitter_type' => 'equals summary_large_image'
+            'twitter_type' => 'equals summary_large_image',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1518,6 +1659,7 @@ class Metatags {
           'display' => __('statamic-metatags::twitter.creator_id'),
           'instructions' => __('statamic-metatags::twitter.creator_id_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1527,8 +1669,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.description_instructions'),
           'type' => 'textarea',
           'if' => [
-            'twitter_type' => 'not app'
+            'twitter_type' => 'not app',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1538,8 +1681,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.title_instructions'),
           'type' => 'text',
           'if' => [
-            'twitter_type' => 'not app'
+            'twitter_type' => 'not app',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1554,8 +1698,9 @@ class Metatags {
           'type' => 'assets',
           'max_files' => 1,
           'if' => [
-            'twitter_type' => 'not app'
+            'twitter_type' => 'not app',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1566,8 +1711,9 @@ class Metatags {
           'type' => 'text',
           'input_type' => 'url',
           'if' => [
-            'twitter_type' => 'equals player'
+            'twitter_type' => 'equals player',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1578,8 +1724,9 @@ class Metatags {
           'type' => 'text',
           'input_type' => 'number',
           'if' => [
-            'twitter_type' => 'equals player'
+            'twitter_type' => 'equals player',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1590,8 +1737,9 @@ class Metatags {
           'type' => 'text',
           'input_type' => 'number',
           'if' => [
-            'twitter_type' => 'equals player'
+            'twitter_type' => 'equals player',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1602,8 +1750,9 @@ class Metatags {
           'type' => 'text',
           'input_type' => 'url',
           'if' => [
-            'twitter_type' => 'equals player'
+            'twitter_type' => 'equals player',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1613,8 +1762,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.app_name_iphone_instructions'),
           'type' => 'text',
           'if' => [
-            'twitter_type' => 'equals app'
+            'twitter_type' => 'equals app',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1624,8 +1774,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.app_id_iphone_instructions'),
           'type' => 'text',
           'if' => [
-            'twitter_type' => 'equals app'
+            'twitter_type' => 'equals app',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1635,8 +1786,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.app_url_iphone_instructions'),
           'type' => 'text',
           'if' => [
-            'twitter_type' => 'equals app'
+            'twitter_type' => 'equals app',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1646,8 +1798,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.app_name_ipad_instructions'),
           'type' => 'text',
           'if' => [
-            'twitter_type' => 'equals app'
+            'twitter_type' => 'equals app',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1657,8 +1810,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.app_id_ipad_instructions'),
           'type' => 'text',
           'if' => [
-            'twitter_type' => 'equals app'
+            'twitter_type' => 'equals app',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1668,8 +1822,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.app_url_ipad_instructions'),
           'type' => 'text',
           'if' => [
-            'twitter_type' => 'equals app'
+            'twitter_type' => 'equals app',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1679,8 +1834,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.app_name_googleplay_instructions'),
           'type' => 'text',
           'if' => [
-            'twitter_type' => 'equals app'
+            'twitter_type' => 'equals app',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1690,8 +1846,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.app_id_googleplay_instructions'),
           'type' => 'text',
           'if' => [
-            'twitter_type' => 'equals app'
+            'twitter_type' => 'equals app',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1701,8 +1858,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::twitter.app_url_googleplay_instructions'),
           'type' => 'text',
           'if' => [
-            'twitter_type' => 'equals app'
+            'twitter_type' => 'equals app',
           ],
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -1710,13 +1868,13 @@ class Metatags {
     return $this;
   }
 
-  protected function pinterest() {
+  protected function pinterest(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'pinterest',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.pinterest'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -1730,6 +1888,7 @@ class Metatags {
           'allow_uploads' => true,
           'max_files' => 6,
           'type' => 'assets',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1738,6 +1897,7 @@ class Metatags {
           'display' => __('statamic-metatags::pinterest.see_also'),
           'instructions' => __('statamic-metatags::pinterest.see_also_instructions'),
           'type' => 'list',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1747,6 +1907,7 @@ class Metatags {
           'instructions' => __('statamic-metatags::pinterest.referenced_instructions'),
           'type' => 'text',
           'input_type' => 'url',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1756,6 +1917,7 @@ class Metatags {
           'instructions' => __('statamic-metatags::pinterest.rating_instructions'),
           'type' => 'text',
           'input_type' => 'number',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1765,6 +1927,7 @@ class Metatags {
           'instructions' => __('statamic-metatags::pinterest.rating_scale_instructions'),
           'type' => 'text',
           'input_type' => 'number',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1774,6 +1937,7 @@ class Metatags {
           'instructions' => __('statamic-metatags::pinterest.rating_count_instructions'),
           'type' => 'text',
           'input_type' => 'number',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1788,6 +1952,7 @@ class Metatags {
           'clearable' => true,
           'searchable' => true,
           'type' => 'select',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1798,8 +1963,9 @@ class Metatags {
           'time_enabled' => true,
           'type' => 'date',
           'if' => [
-            'pinterest_type' => 'equals article'
+            'pinterest_type' => 'equals article',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1809,8 +1975,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::pinterest.section_instructions'),
           'type' => 'text',
           'if' => [
-            'pinterest_type' => 'equals article'
+            'pinterest_type' => 'equals article',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1820,8 +1987,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::pinterest.tag_instructions'),
           'type' => 'taggable',
           'if' => [
-            'pinterest_type' => 'equals article'
+            'pinterest_type' => 'equals article',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1839,8 +2007,9 @@ class Metatags {
           'type' => 'select',
           'width' => 50,
           'if' => [
-            'pinterest_type' => 'equals product'
+            'pinterest_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1851,8 +2020,9 @@ class Metatags {
           'type' => 'text',
           'width' => 50,
           'if' => [
-            'pinterest_type' => 'equals product'
+            'pinterest_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1862,8 +2032,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::pinterest.availability_destinations_instructions'),
           'type' => 'taggable',
           'if' => [
-            'pinterest_type' => 'equals product'
+            'pinterest_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1874,8 +2045,9 @@ class Metatags {
           'time_enabled' => true,
           'type' => 'date',
           'if' => [
-            'pinterest_type' => 'equals product'
+            'pinterest_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1886,8 +2058,9 @@ class Metatags {
           'time_enabled' => true,
           'type' => 'date',
           'if' => [
-            'pinterest_type' => 'equals product'
+            'pinterest_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1898,8 +2071,9 @@ class Metatags {
           'time_enabled' => true,
           'type' => 'date',
           'if' => [
-            'pinterest_type' => 'equals product'
+            'pinterest_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1916,8 +2090,9 @@ class Metatags {
           'searchable' => true,
           'type' => 'select',
           'if' => [
-            'pinterest_type' => 'equals product'
+            'pinterest_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1927,8 +2102,9 @@ class Metatags {
           'instructions' => __('statamic-metatags::pinterest.color_instructions'),
           'type' => 'taggable',
           'if' => [
-            'pinterest_type' => 'equals product'
+            'pinterest_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1963,8 +2139,9 @@ class Metatags {
           'type' => 'select',
           'multiple' => true,
           'if' => [
-            'pinterest_type' => 'equals product'
+            'pinterest_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -1978,8 +2155,9 @@ class Metatags {
           'allow_uploads' => true,
           'type' => 'assets',
           'if' => [
-            'pinterest_type' => 'equals product'
+            'pinterest_type' => 'equals product',
           ],
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -1987,13 +2165,13 @@ class Metatags {
     return $this;
   }
 
-  protected function appLinks() {
+  protected function appLinks(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'app_links',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.app_links'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -2002,6 +2180,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.ios_url'),
           'instructions' => __('statamic-metatags::app_links.ios_url_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2010,6 +2189,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.ios_app_store_id'),
           'instructions' => __('statamic-metatags::app_links.ios_app_store_id_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2018,6 +2198,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.ios_app_name'),
           'instructions' => __('statamic-metatags::app_links.ios_app_name_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2026,6 +2207,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.iphone_url'),
           'instructions' => __('statamic-metatags::app_links.iphone_url_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2034,6 +2216,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.iphone_app_store_id'),
           'instructions' => __('statamic-metatags::app_links.iphone_app_store_id_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2042,6 +2225,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.iphone_app_name'),
           'instructions' => __('statamic-metatags::app_links.iphone_app_name_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2050,6 +2234,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.ipad_url'),
           'instructions' => __('statamic-metatags::app_links.ipad_url_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2058,6 +2243,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.ipad_app_store_id'),
           'instructions' => __('statamic-metatags::app_links.ipad_app_store_id_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2066,6 +2252,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.ipad_app_name'),
           'instructions' => __('statamic-metatags::app_links.ipad_app_name_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2074,6 +2261,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.android_url'),
           'instructions' => __('statamic-metatags::app_links.android_url_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2082,6 +2270,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.android_package'),
           'instructions' => __('statamic-metatags::app_links.android_package_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2090,6 +2279,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.android_class'),
           'instructions' => __('statamic-metatags::app_links.android_class_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2098,6 +2288,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.android_app_name'),
           'instructions' => __('statamic-metatags::app_links.android_app_name_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2106,6 +2297,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.wp_url'),
           'instructions' => __('statamic-metatags::app_links.wp_url_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2114,6 +2306,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.wp_app_id'),
           'instructions' => __('statamic-metatags::app_links.wp_app_id_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2122,6 +2315,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.wp_app_name'),
           'instructions' => __('statamic-metatags::app_links.wp_app_name_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2130,6 +2324,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.win_url'),
           'instructions' => __('statamic-metatags::app_links.win_url_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2138,6 +2333,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.win_app_id'),
           'instructions' => __('statamic-metatags::app_links.win_app_id_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2146,6 +2342,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.win_app_name'),
           'instructions' => __('statamic-metatags::app_links.win_app_name_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2154,6 +2351,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.win_uni_url'),
           'instructions' => __('statamic-metatags::app_links.win_uni_url_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2162,6 +2360,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.win_uni_app_id'),
           'instructions' => __('statamic-metatags::app_links.win_uni_app_id_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2170,6 +2369,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.win_uni_app_name'),
           'instructions' => __('statamic-metatags::app_links.win_uni_app_name_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2178,6 +2378,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.web_url'),
           'instructions' => __('statamic-metatags::app_links.web_url_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2186,6 +2387,7 @@ class Metatags {
           'display' => __('statamic-metatags::app_links.web_should_fallback'),
           'instructions' => __('statamic-metatags::app_links.web_should_fallback_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -2193,13 +2395,13 @@ class Metatags {
     return $this;
   }
 
-  protected function mobile() {
+  protected function mobile(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'mobile',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.mobile'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -2208,6 +2410,7 @@ class Metatags {
           'display' => __('statamic-metatags::mobile.viewport'),
           'instructions' => __('statamic-metatags::mobile.viewport_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2216,6 +2419,7 @@ class Metatags {
           'display' => __('statamic-metatags::mobile.mobile_optimized'),
           'instructions' => __('statamic-metatags::mobile.mobile_optimized_instructions'),
           'type' => 'taggable',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2224,6 +2428,7 @@ class Metatags {
           'display' => __('statamic-metatags::mobile.handheld_friendly'),
           'instructions' => __('statamic-metatags::mobile.handheld_friendly_instructions'),
           'type' => 'taggable',
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -2231,13 +2436,13 @@ class Metatags {
     return $this;
   }
 
-  protected function apple() {
+  protected function apple(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'apple',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.apple'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -2246,6 +2451,7 @@ class Metatags {
           'display' => __('statamic-metatags::apple.format_detection'),
           'instructions' => __('statamic-metatags::apple.format_detection_instructions'),
           'type' => 'taggable',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2254,6 +2460,7 @@ class Metatags {
           'display' => __('statamic-metatags::apple.apple_itunes_app'),
           'instructions' => __('statamic-metatags::apple.apple_itunes_app_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2262,6 +2469,7 @@ class Metatags {
           'display' => __('statamic-metatags::apple.apple_mobile_web_app_capable'),
           'instructions' => __('statamic-metatags::apple.apple_mobile_web_app_capable_instructions'),
           'type' => 'text',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2276,6 +2484,7 @@ class Metatags {
           ],
           'type' => 'select',
           'clearable' => true,
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -2283,13 +2492,13 @@ class Metatags {
     return $this;
   }
 
-  protected function android() {
+  protected function android(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'android',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.android'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -2302,6 +2511,7 @@ class Metatags {
           'lock_opacity' => true,
           'default_color_mode' => 'HEXA',
           'color_modes' => ['HEX'],
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2314,7 +2524,8 @@ class Metatags {
           'restrict' => false,
           'allow_uploads' => true,
           'max_files' => 1,
-          'type' => 'assets'
+          'type' => 'assets',
+          'localizable' => $localizable,
         ]
       ],
     ];
@@ -2322,13 +2533,13 @@ class Metatags {
     return $this;
   }
 
-  protected function favicons() {
+  protected function favicons(bool $localizable) {
     $this->fields = [
       [
         'handle' => 'favicons',
         'field' => [
           'display' => __('statamic-metatags::fieldsets.favicons'),
-          'type' => 'section'
+          'type' => 'section',
         ]
       ],
       [
@@ -2342,7 +2553,8 @@ class Metatags {
           'allow_uploads' => true,
           'max_files' => 1,
           'type' => 'assets',
-          'width' => 66
+          'width' => 66,
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2355,7 +2567,8 @@ class Metatags {
           'lock_opacity' => true,
           'default_color_mode' => 'HEXA',
           'color_modes' => ['HEX'],
-          'width' => 33
+          'width' => 33,
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2369,6 +2582,7 @@ class Metatags {
           'allow_uploads' => true,
           'max_files' => 1,
           'type' => 'assets',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2382,6 +2596,7 @@ class Metatags {
           'allow_uploads' => true,
           'max_files' => 1,
           'type' => 'assets',
+          'localizable' => $localizable,
         ]
       ],
       [
@@ -2395,6 +2610,7 @@ class Metatags {
           'allow_uploads' => true,
           'max_files' => 1,
           'type' => 'assets',
+          'localizable' => $localizable,
         ]
       ],
     ];
