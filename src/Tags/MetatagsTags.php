@@ -8,6 +8,7 @@ use Gioppy\StatamicMetatags\DefaultMetatags;
 use Gioppy\StatamicMetatags\Settings;
 use Illuminate\Support\Str;
 use Statamic\Fields\Value;
+use Statamic\Fieldtypes\Text;
 use Statamic\Support\Arr;
 use Statamic\Tags\Tags;
 
@@ -45,9 +46,15 @@ class MetatagsTags extends Tags {
       ->merge($pageFields);
 
     // Check if fields have title, otherwise load default title
+    if (array_key_exists('basic_title', $fields->all()) && !is_string($fields->only('basic_title')->all()['basic_title'])) {
+      $defaultTitle = $page->only('title')->all();
+      $fields->prepend(new Value($defaultTitle['title'] ?? ' '), 'basic_title');
+    }
+
+    // If there is no basic_title, load page title
     if (!array_key_exists('basic_title', $fields->all())) {
       $defaultTitle = $page->only('title')->all();
-      $fields->prepend(new Value($defaultTitle['title']), 'basic_title');
+      $fields->prepend(new Value($defaultTitle['title'] ?? ' ', 'basic_title', new Text()), 'basic_title');
     }
 
     return view('statamic-metatags::metatags', [
