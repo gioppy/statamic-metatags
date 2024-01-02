@@ -1,7 +1,7 @@
 {{ if settings | in_array:basic }}
 <!-- BASIC METATAGS-->
 {{ fields }}
-  {{ if basic_title }}<title>{{ basic_title }} {{ extras.site_name_separator}} {{ extras.site_name}}</title>{{ /if }}
+  {{ if basic_title }}<title>{{ basic_title }}{{ extras.site_name_separator}}{{ extras.site_name}}</title>{{ /if }}
   {{ if basic_description }}<meta name="description" content="{{ basic_description }}" />{{ /if }}
   {{ if basic_keywords }}<meta name="keywords" content="{{ basic_keywords | join }}" />{{ /if }}
   {{ if basic_robots }}<meta name="robots" content="{{ basic_robots }}{{ value }}{{ if !last }}, {{ /if }}{{ /basic_robots }}" />{{ /if }}
