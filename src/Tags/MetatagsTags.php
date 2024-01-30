@@ -24,10 +24,8 @@ class MetatagsTags extends Tags {
 
     $defaultValues = Arr::removeNullValues(DefaultMetatags::make()->augmented());
 
-    $page = collect($this->context->get('page'));
-
     // Get page metatags and remove null values
-    $pageFields = $page->filter(function ($item, $key) use ($settingsMeta) {
+    $pageFields = $this->context->filter(function ($item, $key) use ($settingsMeta) {
       return Str::startsWith($key, $settingsMeta);
     })
       ->filter()
@@ -46,14 +44,14 @@ class MetatagsTags extends Tags {
       ->merge($pageFields);
 
     // Check if fields have title, otherwise load default title
-    if (array_key_exists('basic_title', $fields->all()) && !is_string($fields->only('basic_title')->all()['basic_title'])) {
-      $defaultTitle = $page->only('title')->all();
+    if (array_key_exists('basic_title', $fields->all()) && !is_string($fields->get('basic_title')->value())) {
+      $defaultTitle = $this->context->only('title')->all();
       $fields->prepend(new Value($defaultTitle['title'] ?? ' '), 'basic_title');
     }
 
     // If there is no basic_title, load page title
     if (!array_key_exists('basic_title', $fields->all())) {
-      $defaultTitle = $page->only('title')->all();
+      $defaultTitle = $this->context->only('title')->all();
       $fields->prepend(new Value($defaultTitle['title'] ?? ' ', 'basic_title', new Text()), 'basic_title');
     }
 
@@ -63,8 +61,8 @@ class MetatagsTags extends Tags {
       'extras' => [
         'site_name' => $settingsDefault['site_name'],
         'site_name_separator' => $settingsDefault['site_name_separator'],
-        'permalink' => $page->get('permalink')
-      ]
+        'permalink' => $this->context->get('permalink'),
+      ],
     ]);
   }
 }
