@@ -1,6 +1,6 @@
 <?php
 
-namespace Gioppy\StatamicMetatags\Services;
+namespace Gioppy\StatamicMetatags;
 
 use Statamic\Facades\CP\Nav;
 use Statamic\Facades\Permission;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Gioppy\StatamicMetatags\Services\Http\Controllers;
+namespace Gioppy\StatamicMetatags\Http\Controllers;
 
 use Gioppy\StatamicMetatags\Services\Metatags;
 use Gioppy\StatamicMetatags\Services\Settings;

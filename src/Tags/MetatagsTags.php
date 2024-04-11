@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Gioppy\StatamicMetatags\Services\Tags;
+namespace Gioppy\StatamicMetatags\Tags;
 
 
 use Gioppy\StatamicMetatags\Services\DefaultMetatags;
