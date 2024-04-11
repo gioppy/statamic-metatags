@@ -3,36 +3,50 @@
 namespace Gioppy\StatamicMetatags;
 
 use Statamic\Facades\CP\Nav;
+use Statamic\Facades\Permission;
 use Statamic\Providers\AddonServiceProvider;
 
-class ServiceProvider extends AddonServiceProvider {
+class ServiceProvider extends AddonServiceProvider
+{
 
-  protected $tags = [
-    Tags\MetatagsTags::class,
-  ];
+    protected $tags = [
+        Tags\MetatagsTags::class,
+    ];
 
-  protected $routes = [
-    'cp' => __DIR__ . '/../routes/cp.php',
-  ];
+    protected $routes = [
+        'cp' => __DIR__ . '/../routes/cp.php',
+    ];
 
-  public function boot() {
-    parent::boot();
+    public function boot()
+    {
+        parent::boot();
 
-    $this->bootAddonNav();
-  }
+        $this->bootAddonNav();
+    }
 
-  protected function bootAddonNav() {
-    Nav::extend(function ($nav) {
-      $nav->tools('Meta tags')
-        ->route('metatags.index')
-        ->icon('angle-brackets-dots')
-        ->active('metatags')
-        ->children([
-          'Settings' => cp_route('metatags.settings'),
-          'Defaults' => cp_route('metatags.defaults'),
-        ]);
-    });
+    protected function bootAddonNav()
+    {
+        Permission::group('metatags', 'Metatags', function () {
+        });
 
-    return $this;
-  }
+        Permission::extend(function () {
+            Permission::register('manage metatags settings')
+                ->label('Manage Metatags Settings')
+                ->group('metatags')
+                ->description('Manage preferences of Metatags');
+        });
+
+        Nav::extend(function ($nav) {
+            $nav->content('Meta tags')
+                ->route('metatags.index')
+                ->icon('angle-brackets-dots')
+                ->can('manage metatags settings')
+                ->children([
+                    'Settings' => cp_route('metatags.settings'),
+                    'Defaults' => cp_route('metatags.defaults'),
+                ]);
+        });
+
+        return $this;
+    }
 }
