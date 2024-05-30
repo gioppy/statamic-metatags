@@ -1,17 +1,18 @@
 # Statamic Meta tags
 
-This is an add-on for Statamic 3. It gives the ability to manage and customize almost every created meta tags!
+This is an add-on for Statamic 5. It gives the ability to manage and customize almost every created meta tags!
 
-![Meta Tags index](https://web.giovannibuffa.it/github/statamic_metatags_01.png)
-![Default values](https://web.giovannibuffa.it/github/statamic_metatags_02.png)
+![Meta Tags index](https://web.giovannibuffa.it/github/statamic_metatags_4_01.png)
+![Blueprints](https://web.giovannibuffa.it/github/statamic_metatags_4_02.png)
+![Default values](https://web.giovannibuffa.it/github/statamic_metatags_4_03.png)
 
 ## Supperted Meta tags
 
 - Classic meta tags, mainly used by search engines
 - Site verification
 - Dublin core
-- Google +
-- Google CSE
+- Google + (currently not output on template)
+- Google CSE (currently not output on template)
 - Open Graph
 - Facebook App
 - Twitter
@@ -34,19 +35,36 @@ If you are on Statamic >= 3.3 and < 4.0 use v2 branch:
 
 ```composer require gioppy/statamic-metatags "2.0.1"```
 
-If you are on Statamic >= 4.0 use v3 branch
+If you are on Statamic >= 4.0 and < 5.0 use v3 branch
+
+```composer require gioppy/statamic-metatags "^3.0"```
+
+If you are on Statamic >= 5.0 use v4 branch
 
 ```composer require gioppy/statamic-metatags```
 
 ## How to use
 
-All meta tags are managed through fieldsets: once the necessary categories are activated, the `metatags.yaml` fieldset is created or updated.
+All meta tags are injected dynamically within an entry or term depending on the options selected for each individual blueprint.
 
-You can insert meta tags directly into a blueprint by selecting the metatags fieldset. **It is not necessary to set a prefix for the fieldset**.
+In the blueprints section, under Meta Tags, you can select all the categories you want to activate for each individual blueprint. At the moment it is possible to enable meta tags only for collections and taxonomies.
 
-![Fieldset](https://web.giovannibuffa.it/github/statamic_metatags_03.png)
+In your template, remove the `title` tag in `layout.antlers.html`. For every category of meta tags you have a antlers tag to use it:
 
-In your template, remove the `title` tag in `layout.antlers.html` and replace it with `{{ metatags }}`.
+`{{ metatags:basic }}`  
+`{{ metatags:advanced }}`  
+`{{ metatags:dublin_core }}`  
+`{{ metatags:dublin_core_advanced }}`  
+`{{ metatags:opengraph }}`  
+`{{ metatags:facebook }}`  
+`{{ metatags:twitter }}`  
+`{{ metatags:pinterest }}`  
+`{{ metatags:site_verifications }}`  
+`{{ metatags:app_links }}`  
+`{{ metatags:mobile }}`  
+`{{ metatags:apple }}`  
+`{{ metatags:android }}`  
+`{{ metatags:favicons }}`  
 
 ## Credits
 
