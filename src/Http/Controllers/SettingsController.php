@@ -2,8 +2,8 @@
 
 namespace Gioppy\StatamicMetatags\Http\Controllers;
 
-use Gioppy\StatamicMetatags\Services\Metatags;
-use Gioppy\StatamicMetatags\Services\Settings;
+use Gioppy\StatamicMetatags\Services\MetatagsService;
+use Gioppy\StatamicMetatags\Services\MetatagsSettingsService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Statamic\Facades\AssetContainer;
@@ -18,7 +18,7 @@ class SettingsController extends Controller
     {
         $blueprint = $this->blueprint();
         $fields = $blueprint->fields()
-            ->addValues(Settings::make()->values())
+            ->addValues(MetatagsSettingsService::make()->values())
             ->preProcess();
 
         return view('statamic-metatags::settings.edit', [
@@ -40,11 +40,11 @@ class SettingsController extends Controller
 
         $values = Arr::removeNullValues($fields->process()->values()->all());
 
-        Settings::make($values)->save();
+        MetatagsSettingsService::make($values)->save();
 
         Fieldset::make('metatags')->setContents([
             'title' => 'metatags',
-            'fields' => Metatags::make()->features()
+            'fields' => MetatagsService::make()->features()
         ])->save();
     }
 
@@ -72,6 +72,10 @@ class SettingsController extends Controller
                                     'instructions' => __('statamic-metatags::fieldsets.general:site_name:instructions'),
                                     'type' => 'text',
                                     'width' => 50,
+                                    'listable' => false,
+                                    'validate' => [
+                                        'required',
+                                    ],
                                 ]
                             ],
                             [
@@ -81,6 +85,7 @@ class SettingsController extends Controller
                                     'instructions' => __('statamic-metatags::fieldsets.general:site_name_separator:instructions'),
                                     'type' => 'text',
                                     'width' => 50,
+                                    'listable' => false,
                                 ]
                             ],
                             [
@@ -94,7 +99,11 @@ class SettingsController extends Controller
                                     'searchable' => true,
                                     'push_tags' => false,
                                     'cast_booleans' => false,
-                                    'options' => $assetContainersOptions
+                                    'options' => $assetContainersOptions,
+                                    'listable' => false,
+                                    'validate' => [
+                                        'required',
+                                    ],
                                 ]
                             ],
                         ]
@@ -117,94 +126,12 @@ class SettingsController extends Controller
                                     'type' => 'checkboxes',
                                     'instructions' => __('statamic-metatags::fieldsets.meta:basics:instructions'),
                                     'options' => [
-                                        'basic' => 'Basic Meta tags',
-                                        'advanced' => 'Advanced Meta tags',
                                         'site_verifications' => 'Site verifications',
                                     ],
                                     'default' => [
-                                        'basic'
-                                    ]
-                                ]
-                            ],
-                            [
-                                'handle' => 'dublin_core_section',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:dublin_core'),
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:dublin_core_section:instructions'),
-                                    'type' => 'section'
-                                ]
-                            ],
-                            [
-                                'handle' => 'dublin_core',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:dublin_core'),
-                                    'type' => 'checkboxes',
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:dublin_core:instructions'),
-                                    'options' => [
-                                        'dublin_core' => 'Dublin Core',
-                                        'dublin_core_advanced' => 'Dublin core advanced tags'
-                                    ]
-                                ]
-                            ],
-                            [
-                                'handle' => 'google_section',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:google_section'),
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:google_section:instructions'),
-                                    'type' => 'section'
-                                ]
-                            ],
-                            [
-                                'handle' => 'google',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:google'),
-                                    'type' => 'checkboxes',
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:google:instructions'),
-                                    'options' => [
-                                        'google_plus' => 'Google +',
-                                        'google_cse' => 'Google Custom Search Engine',
-                                    ]
-                                ]
-                            ],
-                            [
-                                'handle' => 'facebook_section',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:facebook_section'),
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:facebook_section:instructions'),
-                                    'type' => 'section'
-                                ]
-                            ],
-                            [
-                                'handle' => 'facebook',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:facebook'),
-                                    'type' => 'checkboxes',
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:facebook:instructions'),
-                                    'options' => [
-                                        'og' => 'Open Graph',
-                                        'facebook' => 'Facebook App',
-                                    ]
-                                ]
-                            ],
-                            [
-                                'handle' => 'social_section',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:social_section'),
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:social_section:instructions'),
-                                    'type' => 'section'
-                                ]
-                            ],
-                            [
-                                'handle' => 'social',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:social'),
-                                    'type' => 'checkboxes',
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:social:instructions'),
-                                    'options' => [
-                                        'twitter' => 'Twitter',
-                                        'pinterest' => 'Pinterest',
-                                    ]
-                                ]
+                                        'basic',
+                                    ],
+                                ],
                             ],
                             [
                                 'handle' => 'other_section',

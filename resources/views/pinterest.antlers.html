@@ -1,0 +1,38 @@
+{{ if pinterest_image }}
+  {{ pinterest_image }}
+  <meta property="og:image" content="{{ permalink }}" />
+  {{ /pinterest_image }}
+{{ /if }}
+{{ if pinterest_see_also }}
+  {{ pinterest_see_also }}
+  <meta property="og:see_also" content="{{ value }}" />
+  {{ /pinterest_see_also}}
+{{ /if }}
+{{ if pinterest_referenced }}<meta property="og:referenced" content="{{ pinterest_referenced }}" />{{ /if }}
+{{ if pinterest_rating }}<meta property="og:rating" content="{{ pinterest_rating }}" />{{ /if }}
+{{ if pinterest_rating_scale }}<meta property="og:rating_scale" content="{{ pinterest_rating_scale }}" />{{ /if }}
+{{ if pinterest_rating_count }}<meta property="og:rating_count" content="{{ pinterest_rating_count }}" />{{ /if }}
+{{ if pinterest_modified_time }}<meta property="article:modified_time" content="{{ pinterest_modified_time format='c' }}" />{{ /if }}
+{{ if pinterest_section }}<meta property="article:section" content="{{ pinterest_section }}" />{{ /if }}
+{{ if pinterest_tag }}<meta property="article:tag" content="{{ pinterest_tag | join }}" />{{ /if }}
+{{ if pinterest_start_date }}<meta property="og:price:start_date" content="{{ pinterest_start_date format='c' }}" />{{ /if }}
+{{ if pinterest_end_date }}<meta property="og:price:end_date" content="{{ pinterest_end_date format='c' }}" />{{ /if }}
+{{ if pinterest_code_type && pinterest_code_id }}<meta property="{{ pinterest_code_type }}" content="{{ pinterest_code_id }}" />{{ /if }}
+{{ if pinterest_availability_destinations }}<meta property="og:availability:destinations" content="{{ pinterest_availability_destinations | join }}" />{{ /if }}
+{{ if pinterest_expiration_time }}<meta property="product:expiration_time" content="{{ pinterest_expiration_time format='c' }}" />{{ /if }}
+{{ if pinterest_gender }}<meta property="product:gender" content="{{ pinterest_gender }}" />{{ /if }}
+{{ if pinterest_color }}
+  {{ pinterest_color }}
+    <meta property="product:color" content="{{ value }}" />
+  {{ /pinterest_color }}
+{{ /if }}
+{{ if pinterest_color_map }}
+  {{ pinterest_color_map }}
+  <meta property="product:color:map" content="{{ value }}" />
+  {{ /pinterest_color_map }}
+{{ /if }}
+{{ if pinterest_color_image }}
+  {{ pinterest_color_image }}
+  <meta property="product:color:image" content="{{ url }}" />
+  {{ /pinterest_color_image }}
+{{ /if }}

@@ -4,8 +4,8 @@
 namespace Gioppy\StatamicMetatags\Http\Controllers;
 
 
-use Gioppy\StatamicMetatags\Services\DefaultMetatags;
-use Gioppy\StatamicMetatags\Services\Metatags;
+use Gioppy\StatamicMetatags\Services\MetatagsDefaultService;
+use Gioppy\StatamicMetatags\Services\MetatagsService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Statamic\Facades\Blueprint;
@@ -18,7 +18,7 @@ class DefaultsController extends Controller
     {
         $blueprint = $this->blueprint();
         $fields = $blueprint->fields()
-            ->addValues(DefaultMetatags::make()->values())
+            ->addValues(MetatagsDefaultService::make()->values())
             ->preProcess();
 
         return view('statamic-metatags::defaults.edit', [
@@ -40,18 +40,19 @@ class DefaultsController extends Controller
 
         $values = Arr::removeNullValues($fields->process()->values()->all());
 
-        DefaultMetatags::make($values)->save();
+        MetatagsDefaultService::make($values)->save();
     }
 
     private function blueprint()
     {
         return Blueprint::make()
             ->setContents([
-                'sections' => [
+                'tabs' => [
                     'main' => [
-                        'fields' => Metatags::make()->features()
+                        'display' => __('Main'),
+                        'sections' => MetatagsService::make()->features()
                     ],
-                ]
+                ],
             ]);
     }
 }

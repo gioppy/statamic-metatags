@@ -1,0 +1,26 @@
+{{ if twitter_type }}<meta property="twitter:card" content="{{ twitter_type:value }}" />{{ /if }}
+{{ if twitter_site }}<meta property="twitter:site" content="{{ twitter_site }}" />{{ /if }}
+{{ if twitter_site_id }}<meta property="twitter:site:id" content="{{ twitter_site_id }}" />{{ /if }}
+{{ if twitter_creator }}<meta property="twitter:creator" content="{{ twitter_creator }}" />{{ /if }}
+{{ if twitter_creator_id }}<meta property="twitter:creator:id" content="{{ twitter_creator_id }}" />{{ /if }}
+{{ if twitter_description }}<meta property="twitter:description" content="{{ twitter_description }}" />{{ /if }}
+{{ if twitter_title }}<meta property="twitter:title" content="{{ twitter_title }}" />{{ /if }}
+{{ if twitter_image }}
+{{ twitter_image }}
+  <meta property="twitter:image" content="{{ permalink }}" />
+  {{ if alt }}<meta property="twitter:image:alt" content="{{ alt }}" />{{ /if }}
+{{ /twitter_image }}
+{{ /if }}
+{{ if twitter_player }}<meta property="twitter:player" content="{{ twitter_player }}" />{{ /if }}
+{{ if twitter_player_width }}<meta property="twitter:player:width" content="{{ twitter_player_width }}" />{{ /if }}
+{{ if twitter_player_height }}<meta property="twitter:player:height" content="{{ twitter_player_height }}" />{{ /if }}
+{{ if twitter_player_stream }}<meta property="twitter:player:stream" content="{{ twitter_player_stream }}" />{{ /if }}
+{{ if twitter_app_name_iphone }}<meta property="twitter:app:name:iphone" content="{{ twitter_app_name_iphone }}" />{{ /if }}
+{{ if twitter_app_id_iphone }}<meta property="twitter:app:id:iphone" content="{{ twitter_app_id_iphone }}" />{{ /if }}
+{{ if twitter_app_url_iphone }}<meta property="twitter:app:url:iphone" content="{{ twitter_app_url_iphone }}" />{{ /if }}
+{{ if twitter_app_name_ipad }}<meta property="twitter:app:name:ipad" content="{{ twitter_app_name_ipad }}" />{{ /if }}
+{{ if twitter_app_id_ipad }}<meta property="twitter:app:id:ipad" content="{{ twitter_app_id_ipad }}" />{{ /if }}
+{{ if twitter_app_url_ipad }}<meta property="twitter:app:url:ipad" content="{{ twitter_app_url_ipad }}" />{{ /if }}
+{{ if twitter_app_name_googleplay }}<meta property="twitter:app:name:googleplay" content="{{ twitter_app_name_googleplay }}" />{{ /if }}
+{{ if twitter_app_id_googleplay }}<meta property="twitter:app:id:googleplay" content="{{ twitter_app_id_googleplay }}" />{{ /if }}
+{{ if twitter_app_url_googleplay }}<meta property="twitter:app:url:googleplay" content="{{ twitter_app_url_googleplay }}" />{{ /if }}
