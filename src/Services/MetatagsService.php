@@ -1055,50 +1055,39 @@ class MetatagsService
         return $this;
     }
 
-    protected function googleCSE(bool $localizable): self
+    protected function googleSearch(bool $localizable): self
     {
         $this->fields->add([
             [
-                'display' => __('statamic-metatags::fieldsets.google_cse'),
+                'display' => __('statamic-metatags::fieldsets.google_search'),
                 'instruction' => '',
                 'fields' => [
                     [
-                        'handle' => 'google_cse_department',
+                        'handle' => 'google_search_nositelinkssearchbox',
                         'field' => [
-                            'display' => __('statamic-metatags::google_cse.department'),
-                            'instructions' => __('statamic-metatags::google_cse.department_instructions'),
-                            'type' => 'text',
+                            'display' => __('statamic-metatags::google_search.nositelinkssearchbox'),
+                            'instructions' => __('statamic-metatags::google_search.nositelinkssearchbox_instructions'),
+                            'type' => 'toggle',
                             'localizable' => $localizable,
                             'listable' => false,
                         ],
                     ],
                     [
-                        'handle' => 'google_cse_audience',
+                        'handle' => 'google_search_notranslate',
                         'field' => [
-                            'display' => __('statamic-metatags::google_cse.audience'),
-                            'instructions' => __('statamic-metatags::google_cse.audience_instructions'),
-                            'type' => 'text',
+                            'display' => __('statamic-metatags::google_search.notranslate'),
+                            'instructions' => __('statamic-metatags::google_search.notranslate_instructions'),
+                            'type' => 'toggle',
                             'localizable' => $localizable,
                             'listable' => false,
                         ],
                     ],
                     [
-                        'handle' => 'google_cse_doc_status',
+                        'handle' => 'google_search_nopagereadaloud',
                         'field' => [
-                            'display' => __('statamic-metatags::google_cse.doc_status'),
-                            'instructions' => __('statamic-metatags::google_cse.doc_status_instructions'),
-                            'type' => 'text',
-                            'localizable' => $localizable,
-                            'listable' => false,
-                        ],
-                    ],
-                    [
-                        'handle' => 'google_cse_google_rating',
-                        'field' => [
-                            'display' => __('statamic-metatags::google_cse.google_rating'),
-                            'instructions' => __('statamic-metatags::google_cse.google_rating_instructions'),
-                            'input_type' => 'number',
-                            'type' => 'text',
+                            'display' => __('statamic-metatags::google_search.nopagereadaloud'),
+                            'instructions' => __('statamic-metatags::google_search.nopagereadaloud_instructions'),
+                            'type' => 'toggle',
                             'localizable' => $localizable,
                             'listable' => false,
                         ],

@@ -134,6 +134,25 @@ class SettingsController extends Controller
                                 ],
                             ],
                             [
+                                'handle' => 'google_section',
+                                'field' => [
+                                    'display' => __('statamic-metatags::fieldsets.meta:google_section'),
+                                    'instructions' => __('statamic-metatags::fieldsets.meta:google_section:instructions'),
+                                    'type' => 'section',
+                                ],
+                            ],
+                            [
+                                'handle' => 'google',
+                                'field' => [
+                                    'display' => __('statamic-metatags::fieldsets.meta:google'),
+                                    'type' => 'checkboxes',
+                                    'instructions' => __('statamic-metatags::fieldsets.meta:google:instructions'),
+                                    'options' => [
+                                        'google_search' => 'Google Search',
+                                    ],
+                                ],
+                            ],
+                            [
                                 'handle' => 'other_section',
                                 'field' => [
                                     'display' => __('statamic-metatags::fieldsets.meta:other_section'),

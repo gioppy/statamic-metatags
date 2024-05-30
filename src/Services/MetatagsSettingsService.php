@@ -116,26 +116,6 @@ class MetatagsSettingsService
                                 ],
                             ],
                             [
-                                'handle' => 'google_section',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:google_section'),
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:google_section:instructions'),
-                                    'type' => 'section',
-                                ],
-                            ],
-                            [
-                                'handle' => 'google',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:google'),
-                                    'type' => 'checkboxes',
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:google:instructions'),
-                                    'options' => [
-                                        'google_plus' => 'Google +',
-                                        'google_cse' => 'Google Custom Search Engine',
-                                    ],
-                                ],
-                            ],
-                            [
                                 'handle' => 'facebook_section',
                                 'field' => [
                                     'display' => __('statamic-metatags::fieldsets.meta:facebook_section'),

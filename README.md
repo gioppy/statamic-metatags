@@ -11,8 +11,9 @@ This is an add-on for Statamic 5. It gives the ability to manage and customize a
 - Classic meta tags, mainly used by search engines
 - Site verification
 - Dublin core
-- Google + (currently not output on template)
-- Google CSE (currently not output on template)
+- ~~Google +~~
+- ~~Google CSE~~
+- Google Search
 - Open Graph
 - Facebook App
 - Twitter
@@ -77,6 +78,9 @@ Set the meta tags you want to use for each blueprint and the common meta tags.
 Check that, by editing an entry or term, you correctly see the newly SEO tab and the values of the meta tags fields.
 
 Edit your `layout.antlers.html` by replacing the `{{ metatags }}` tag with new antlers tags, depending on the categories you have enabled.
+
+> [!WARNING]
+> Google+ and Google CSE meta tags are no longer available!
 
 ## Credits
 
