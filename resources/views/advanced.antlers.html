@@ -1,0 +1,14 @@
+{{ if advanced_author }}<meta name="author" content="{{ advanced_author }}" />{{ /if }}
+{{ if advanced_generator }}<meta name="generator" content="{{ advanced_generator }}" />{{ /if }}
+{{ if advanced_image }}<link rel="image_src" href="{{ advanced_image:permalink }}">{{ /if }}
+{{ if advanced_rights }}<meta name="copyright" content="{{ advanced_rights }}" />{{ /if }}
+{{ if advanced_rating }}<meta name="rating" content="{{ advanced_rating:value }}" />{{ /if }}
+{{ if advanced_referrer }}<meta name="referrer" content="{{ advanced_referrer:value }}" />{{ /if }}
+<link rel="canonical" href="{{ advanced_canonical ?? extras.permalink }}">
+{{ if advanced_short_link }}<link rel="shortlink" href="{{ advanced_short_link }}" />{{ /if }}
+{{ if advanced_original_source }}<link rel="original-source" href="{{ advanced_original_source }}" />{{ /if }}
+{{ if advanced_geo_position }}<meta name="geo.position" content="{{ advanced_geo_position }}" />{{ /if }}
+{{ if advanced_geo_placename }}<meta name="geo.placename" content="{{ advanced_geo_placename }}" />{{ /if }}
+{{ if advanced_geo_region }}<meta name="geo.region" content="{{ advanced_geo_region }}" />{{ /if }}
+{{ if advanced_icbm }}<meta name="ICBM" content="{{ advanced_icbm }}" />{{ /if }}
+{{ if advanced_refresh }}<meta http-equiv="refresh" content="{{ advanced_refresh }}" />{{ /if }}

@@ -1,0 +1,119 @@
+<meta property="og:site_name" content="{{ extras.site_name }}">
+{{ if og_type }}<meta property="og:type" content="{{ og_type:value }}" />{{ /if }}
+<meta property="og:title" content="{{ og_title ?? basic_title }}" />
+{{ if og_determiner }}<meta property="og:determiner" content="{{ og_determiner:value }}" />{{ /if }}
+{{ if og_description }}<meta property="og:description" content="{{ og_description }}" />{{ /if }}
+{{ if og_image }}
+  {{ og_image }}
+  <meta property="og:image" content="{{ permalink }}" />
+  <meta property="og:image:width" content="{{ width }}" />
+  <meta property="og:image:height" content="{{ height }}" />
+  {{ /og_image }}
+{{ /if }}
+{{ if og_audio }}
+  {{ og_audio }}
+  <meta property="og:audio" content="{{ permalink }}" />
+  {{ /og_audio }}
+{{ /if }}
+{{ if og_video }}
+  {{ og_video }}
+  <meta property="og:video" content="{{ permalink }}" />
+  {{ /og_video }}
+{{ /if }}
+{{ if og_article_author }}
+  {{ og_article_author }}
+  <meta property="article:author" content="{{ value }}" />
+  {{ /og_article_author }}
+{{ /if }}
+{{ if og_article_section }}<meta property="article:section" content="{{ og_article_section }}" />{{ /if }}
+{{ if og_article_tag }}
+  {{ og_article_tag }}
+  <meta property="article:tag" content="{{ value }}" />
+  {{ /og_article_tag }}
+{{ /if }}
+{{ if og_article_published_time }}<meta property="article:published_time" content="{{ og_article_published_time format='c' }}" />{{ /if }}
+{{ if og_article_modified_time }}<meta property="article:modified_time" content="{{ og_article_modified_time format='c' }}" />{{ /if }}
+{{ if og_article_expiration_time }}<meta property="article:expiration_time" content="{{ og_article_expiration_time format='c' }}" />{{ /if }}
+{{ if og_book_author }}
+  {{ og_book_author }}
+  <meta property="book:author" content="{{ value }}" />
+  {{ /og_book_author }}
+{{ /if }}
+{{ if og_book_isbn }}<meta property="book:isbn" content="{{ og_book_isbn }}" />{{ /if }}
+{{ if og_book_release_date }}<meta property="book:release_date" content="{{ og_book_release_date format='c' }}" />{{ /if }}
+{{ if og_book_tag }}
+  {{ og_book_tag }}
+  <meta property="book:tag" content="{{ value }}" />
+  {{ /og_book_tag }}
+{{ /if }}
+{{ if og_profile_first_name }}<meta property="profile:first_name" content="{{ og_profile_first_name }}" />{{ /if }}
+{{ if og_profile_last_name }}<meta property="profile:last_name" content="{{ og_profile_last_name }}" />{{ /if }}
+{{ if og_profile_username }}<meta property="profile:username" content="{{ og_profile_username }}" />{{ /if }}
+{{ if og_profile_gender }}<meta property="profile:gender" content="{{ og_profile_gender.value }}" />{{ /if }}
+{{ if og_video_actor }}
+  {{ og_video_actor }}
+  <meta property="video:actor" content="{{ value }}" />
+  {{ /og_video_actor }}
+{{ /if }}
+{{ if og_video_actor_role }}
+  {{ og_video_actor_role }}
+  <meta property="video:actor:role" content="{{ value }}" />
+  {{ /og_video_actor_role }}
+{{ /if }}
+{{ if og_video_director }}
+  {{ og_video_director }}
+  <meta property="video:director" content="{{ value }}" />
+  {{ /og_video_director }}
+{{ /if }}
+{{ if og_video_writer }}
+  {{ og_video_writer }}
+  <meta property="video:writer" content="{{ value }}" />
+  {{ /og_video_writer }}
+{{ /if }}
+{{ if og_video_duration }}<meta property="video:duration" content="{{ og_video_duration }}" />{{ /if }}
+{{ if og_video_release_date }}<meta property="video:release_date" content="{{ og_video_release_date format='c' }}" />{{ /if }}
+{{ if og_video_tag }}
+  {{ og_video_tag }}
+  <meta property="video:tag" content="{{ value }}" />
+  {{ /og_video_tag }}
+{{ /if }}
+{{ if og_video_series }}<meta property="video:series" content="{{ og_video_series }}" />{{ /if }}
+{{ if og_music_duration }}<meta property="music:duration" content="{{ og_music_duration }}" />{{ /if }}
+{{ if og_music_album }}
+  {{ og_music_album }}
+  <meta property="music:album" content="{{ value }}" />
+  {{ /og_music_album }}
+{{ /if }}
+{{ if og_music_album_disc }}<meta property="music:album:disc" content="{{ og_music_album_disc }}" />{{ /if }}
+{{ if og_music_album_track }}<meta property="music:album:track" content="{{ og_music_album_track }}" />{{ /if }}
+{{ if og_music_musician }}
+  {{ og_music_musician }}
+  <meta property="music:musician" content="{{ value }}" />
+  {{ /og_music_musician }}
+{{ /if }}
+{{ if og_music_song }}<meta property="music:song" content="{{ og_music_song }}" />{{ /if }}
+{{ if og_music_song_disc }}<meta property="music:song:disc" content="{{ og_music_song_disc }}" />{{ /if }}
+{{ if og_music_song_track }}<meta property="music:song:track" content="{{ og_music_song_track }}" />{{ /if }}
+{{ if og_music_musician }}
+  {{ og_music_musician }}
+  <meta property="music:musician" content="{{ value }}" />
+  {{ /og_music_musician }}
+{{ /if }}
+{{ if og_music_release_date }}<meta property="music:release_date" content="{{ og_music_release_date format='c' }}" />{{ /if }}
+{{ if og_music_song }}<meta property="music:song" content="{{ og_music_song }}" />{{ /if }}
+{{ if og_music_song_disc }}<meta property="music:song:disc" content="{{ og_music_song_disc }}" />{{ /if }}
+{{ if og_music_song_track }}<meta property="music:song:track" content="{{ og_music_song_track }}" />{{ /if }}
+{{ if og_music_creator }}<meta property="music:creator" content="{{ og_music_creator }}" />{{ /if }}
+{{ if og_music_creator }}<meta property="music:creator" content="{{ og_music_creator }}" />{{ /if }}
+{{ if og_product_plural_title }}<meta property="product:plural_title" content="{{ og_product_plural_title }}" />{{ /if }}
+{{ if og_product_price_amount }}
+  {{ og_product_price_amount }}
+  <meta property="product:price:amount" content="{{ value }}" />
+  {{ /og_product_price_amount }}
+{{ /if }}
+{{ if og_product_price_currency }}
+  {{ og_product_price_currency }}
+  <meta property="product:price:currency" content="{{ value }}" />
+  {{ /og_product_price_currency }}
+{{ /if }}
+{{ site }}<meta property="og:locale" content="{{ locale }}" />{{ /site }}

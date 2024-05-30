@@ -1,0 +1,6 @@
+{{ if favicons_mask_icon }}
+<link rel="mask-icon" href="{{ favicons_mask_icon }}"{{ if favicons_mask_icon_color }} color="{{ favicons_mask_icon_color }}"{{ /if }} />
+{{ /if }}
+{{ if favicons_apple_touch_icon }}<link rel="apple-touch-icon" sizes="180x180" href="{{ favicons_apple_touch_icon }}">{{ /if }}
+{{ if favicons_icon_16 }}<link rel="icon" type="image/png" sizes="16x16" href="{{ favicons_icon_16 }}">{{ /if }}
+{{ if favicons_icon_32 }}<link rel="icon" type="image/png" sizes="32x32" href="{{ favicons_icon_32 }}">{{ /if }}
