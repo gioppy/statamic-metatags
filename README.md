@@ -60,6 +60,7 @@ In your template, remove the `title` tag in `layout.antlers.html`. For every cat
 `{{ metatags:facebook }}`  
 `{{ metatags:twitter }}`  
 `{{ metatags:pinterest }}`  
+`{{ metatags:google_search }}`  
 `{{ metatags:site_verifications }}`  
 `{{ metatags:app_links }}`  
 `{{ metatags:mobile }}`  
