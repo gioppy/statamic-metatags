@@ -22,7 +22,7 @@ class SettingsController extends Controller
             ->preProcess();
 
         return view('statamic-metatags::settings.edit', [
-            'title' => __('Settings'),
+            'title' => __('Common Settings'),
             'action' => cp_route('metatags.settings.update'),
             'blueprint' => $blueprint->toPublishArray(),
             'meta' => $fields->meta(),

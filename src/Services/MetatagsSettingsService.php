@@ -93,9 +93,6 @@ class MetatagsSettingsService
                                         'basic' => 'Basic Meta tags',
                                         'advanced' => 'Advanced Meta tags',
                                     ],
-                                    'default' => [
-                                        'basic',
-                                    ],
                                 ],
                             ],
                             [

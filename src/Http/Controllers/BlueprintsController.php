@@ -11,6 +11,7 @@ use Statamic\Facades\Collection;
 use Statamic\Facades\Taxonomy;
 use Statamic\Http\Controllers\CP\CpController;
 use Statamic\Support\Arr;
+use Statamic\Support\Str;
 
 class BlueprintsController extends CpController
 {
@@ -19,21 +20,35 @@ class BlueprintsController extends CpController
         $collections = Collection::all()
             ->map(fn(\Statamic\Entries\Collection $collection) => $collection->entryBlueprints())
             ->flatten(1)
-            ->map(fn(\Statamic\Fields\Blueprint $blueprint) => [
-                "type" => explode('.', $blueprint->namespace())[0],
-                "entity" => explode('.', $blueprint->namespace())[1],
-                "name" => $blueprint->handle(),
-                "label" => $blueprint->title(),
-            ]);
+            ->filter(fn(\Statamic\Fields\Blueprint $blueprint) => !Str::contains($blueprint->initialPath(), 'default.yaml'))
+            ->map(function (\Statamic\Fields\Blueprint $blueprint) {
+                $namespace = explode('.', $blueprint->namespace());
+                $settings = MetatagsSettingsService::make(null, "{$namespace[0]}/{$namespace[1]}/{$blueprint->handle()}")->onlyMeta();
+
+                return [
+                    "empty" => count($settings) === 0,
+                    "type" => $namespace[0],
+                    "entity" => $namespace[1],
+                    "name" => $blueprint->handle(),
+                    "label" => $blueprint->title(),
+                ];
+            });
 
         $taxonomies = Taxonomy::all()
             ->map(fn(\Statamic\Taxonomies\Taxonomy $taxonomy) => $taxonomy->termBlueprint())
-            ->map(fn(\Statamic\Fields\Blueprint $blueprint) => [
-                "type" => explode('.', $blueprint->namespace())[0],
-                "entity" => explode('.', $blueprint->namespace())[1],
-                "name" => $blueprint->handle(),
-                "label" => $blueprint->title(),
-            ]);
+            ->filter(fn(\Statamic\Fields\Blueprint $blueprint) => !Str::contains($blueprint->initialPath(), 'default.yaml'))
+            ->map(function (\Statamic\Fields\Blueprint $blueprint) {
+                $namespace = explode('.', $blueprint->namespace());
+                $settings = MetatagsSettingsService::make(null, "{$namespace[0]}/{$namespace[1]}/{$blueprint->handle()}")->onlyMeta();
+
+                return [
+                    "empty" => count($settings) === 0,
+                    "type" => $namespace[0],
+                    "entity" => $namespace[1],
+                    "name" => $blueprint->handle(),
+                    "label" => $blueprint->title(),
+                ];
+            });
 
         return view('statamic-metatags::blueprints.index', [
             'collections' => $collections,

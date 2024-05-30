@@ -2,8 +2,10 @@
 
 namespace Gioppy\StatamicMetatags;
 
+use Gioppy\StatamicMetatags\Contracts\MetaTagsRepository;
 use Gioppy\StatamicMetatags\Listeners\EntryBlueprintFoundListener;
 use Gioppy\StatamicMetatags\Listeners\TermBlueprintFoundListener;
+use Gioppy\StatamicMetatags\Repositories\MetaTagsBlueprintRepository;
 use Statamic\Events\EntryBlueprintFound;
 use Statamic\Events\TermBlueprintFound;
 use Statamic\Facades\CP\Nav;
@@ -62,5 +64,10 @@ class ServiceProvider extends AddonServiceProvider
         });
 
         return $this;
+    }
+
+    public function register(): void
+    {
+        $this->app->bind(MetaTagsRepository::class, fn($app) => new MetaTagsBlueprintRepository());
     }
 }

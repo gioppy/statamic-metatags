@@ -14,10 +14,12 @@
         @foreach($collections as $item)
           <tr>
             <td>
-              <span class="title-dot"></span>
-              <div>
-                <code class="text-3xs">{{ $item['entity'] }}</code>
-                <span class="block">{{ $item['label'] }}</span>
+              <div class="flex items-center">
+                <span class="little-dot rtl:ml-2 ltr:mr-2 @if($item['empty']) bg-gray-400 @else bg-green-600 @endif"></span>
+                <div>
+                  <code class="text-3xs">{{ $item['entity'] }}</code>
+                  <span class="block">{{ $item['label'] }}</span>
+                </div>
               </div>
             </td>
             <td class="ltr:text-right">
@@ -45,9 +47,13 @@
         @foreach($taxonomies as $item)
           <tr>
             <td>
-              <span class="title-dot"></span>
-              <code class="text-3xs">{{ $item['entity'] }}</code>
-              <span>{{ $item['label'] }}</span>
+              <div class="flex items-center">
+                <span class="little-dot rtl:ml-2 ltr:mr-2 @if($item['empty']) bg-gray-400 @else bg-green-600 @endif"></span>
+                <div>
+                  <code class="text-3xs">{{ $item['entity'] }}</code>
+                  <span class="block">{{ $item['label'] }}</span>
+                </div>
+              </div>
             </td>
             <td class="ltr:text-right">
               <div class="flex gap-2 justify-end">
