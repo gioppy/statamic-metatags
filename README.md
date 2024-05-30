@@ -29,7 +29,7 @@ If you think that some meta tags are missing, open a PR!
 
 ```composer require gioppy/statamic-metatags```
 
-In you are on an older versione of Statamic, please use one of these depending on your installed version.
+If you are on an older versione of Statamic, please use one of these depending on your installed version.
 
 #### Statamic < 3.3
 
