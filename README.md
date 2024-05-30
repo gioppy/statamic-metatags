@@ -43,18 +43,6 @@ If you are on an older version of Statamic, please use one of these depending on
 
 ```composer require gioppy/statamic-metatags "^3.0"```
 
-## Upgrade from previous versions
-
-Upgrading from previous versions should not cause you to lose any data within entries or terms. However, you will need to re-configure all meta tags within all blueprints.
-
-First clear the fieldset `metatags` from all your blueprints. **Make sure not to save any content at this stage otherwise your meta tags will be deleted!**
-
-Set the meta tags you want to use for each blueprint and the common meta tags.
-
-Check that, by editing an entry or term, you correctly see the newly SEO tab and the values of the meta tags fields.
-
-Edit your `layout.antlers.html` by replacing the `{{ metatags }}` tag with new antlers tags, depending on the categories you have enabled.
-
 ## How to use
 
 All meta tags are injected dynamically within an entry or term depending on the options selected for each individual blueprint.
@@ -76,7 +64,19 @@ In your template, remove the `title` tag in `layout.antlers.html`. For every cat
 `{{ metatags:mobile }}`  
 `{{ metatags:apple }}`  
 `{{ metatags:android }}`  
-`{{ metatags:favicons }}`  
+`{{ metatags:favicons }}`
+
+## Upgrade from previous versions
+
+Upgrading from previous versions should not cause you to lose any data within entries or terms. However, you will need to re-configure all meta tags within all blueprints.
+
+First clear the fieldset `metatags` from all your blueprints. **Make sure not to save any content at this stage otherwise your meta tags will be deleted!**
+
+Set the meta tags you want to use for each blueprint and the common meta tags.
+
+Check that, by editing an entry or term, you correctly see the newly SEO tab and the values of the meta tags fields.
+
+Edit your `layout.antlers.html` by replacing the `{{ metatags }}` tag with new antlers tags, depending on the categories you have enabled.
 
 ## Credits
 
