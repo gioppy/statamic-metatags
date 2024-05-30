@@ -27,21 +27,21 @@ If you think that some meta tags are missing, open a PR!
 
 ## Installation
 
-If you are on Statamic < 3.3 use the latest release of v1 branch:
+```composer require gioppy/statamic-metatags```
+
+In you are on an older versione of Statamic, please use one of these depending on your installed version.
+
+#### Statamic < 3.3
 
 ```composer require gioppy/statamic-metatags "^1.0.4"```
 
-If you are on Statamic >= 3.3 and < 4.0 use v2 branch:
+#### Statamic >= 3.3 and < 4.0
 
-```composer require gioppy/statamic-metatags "2.0.1"```
+```composer require gioppy/statamic-metatags "^2.0"```
 
-If you are on Statamic >= 4.0 and < 5.0 use v3 branch
+#### Statamic >= 4.0 and < 5.0
 
 ```composer require gioppy/statamic-metatags "^3.0"```
-
-If you are on Statamic >= 5.0 use v4 branch
-
-```composer require gioppy/statamic-metatags```
 
 ## How to use
 
