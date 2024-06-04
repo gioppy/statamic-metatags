@@ -41,11 +41,6 @@ class SettingsController extends Controller
         $values = Arr::removeNullValues($fields->process()->values()->all());
 
         MetatagsSettingsService::make($values)->save();
-
-        Fieldset::make('metatags')->setContents([
-            'title' => 'metatags',
-            'fields' => MetatagsService::make()->features()
-        ])->save();
     }
 
     private function blueprint()
