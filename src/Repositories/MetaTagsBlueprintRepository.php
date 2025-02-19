@@ -24,7 +24,7 @@ class MetaTagsBlueprintRepository implements MetaTagsRepository
             $content = $this->setMetaTags("{$namespacePath}/{$blueprint->handle()}", $content);
         }
 
-        if (!Str::contains(URL::getCurrent(), config('statamic.cp.route', 'cp'))) {
+        if (!Str::contains(URL::getCurrent(), config('statamic.cp.route', 'cp')) && !is_null($entry)) {
             $content = $this->setValues($namespacePath, $blueprint, $entry, $content);
         }
 
@@ -44,7 +44,7 @@ class MetaTagsBlueprintRepository implements MetaTagsRepository
             $content = $this->setMetaTags("{$namespacePath}/{$blueprint->handle()}", $content);
         }
 
-        if (!Str::contains(URL::getCurrent(), config('statamic.cp.route', 'cp'))) {
+        if (!Str::contains(URL::getCurrent(), config('statamic.cp.route', 'cp')) && !is_null($term)) {
             $content = $this->setValues($namespacePath, $blueprint, $term, $content);
         }
 
