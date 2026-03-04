@@ -31,12 +31,9 @@ class SettingsController extends Controller
 
     private function blueprint()
     {
-        /**
-         * @var $assetContainers \Illuminate\Support\Collection
-         */
         $assetContainers = AssetContainer::all();
         $assetContainersOptions = $assetContainers->mapWithKeys(function (\Statamic\Assets\AssetContainer $item) {
-            return [$item->url() => $item->title()];
+            return [$item->handle() => $item->title()];
         })
             ->toArray();
 

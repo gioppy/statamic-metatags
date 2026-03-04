@@ -12,10 +12,14 @@ class MetatagsService
 {
 
     private Collection $fields;
+    private string $assetContainer;
 
     public function __construct()
     {
+        $settings = MetatagsSettingsService::make()->values();
+
         $this->fields = collect();
+        $this->assetContainer = $settings['image_asset_container'] ?? 'assets';
     }
 
     public static function make(): self
@@ -157,7 +161,7 @@ class MetatagsService
                             'display' => __('statamic-metatags::advanced.image'),
                             'instructions' => __('statamic-metatags::advanced.image_instructions'),
                             'mode' => 'list',
-                            'container' => 'assets',
+                            'container' => $this->assetContainer,
                             'restrict' => false,
                             'allow_uploads' => true,
                             'max_files' => 1,
@@ -1149,7 +1153,7 @@ class MetatagsService
                             'display' => __('statamic-metatags::og.image'),
                             'instructions' => __('statamic-metatags::og.image_instructions'),
                             'mode' => 'list',
-                            'container' => 'assets',
+                            'container' => $this->assetContainer,
                             'restrict' => false,
                             'allow_uploads' => true,
                             'type' => 'assets',
@@ -1163,7 +1167,7 @@ class MetatagsService
                             'display' => __('statamic-metatags::og.audio'),
                             'instructions' => __('statamic-metatags::og.audio_instructions'),
                             'mode' => 'list',
-                            'container' => 'assets',
+                            'container' => $this->assetContainer,
                             'restrict' => false,
                             'allow_uploads' => true,
                             'type' => 'assets',
@@ -1177,7 +1181,7 @@ class MetatagsService
                             'display' => __('statamic-metatags::og.video'),
                             'instructions' => __('statamic-metatags::og.video_instructions'),
                             'mode' => 'list',
-                            'container' => 'assets',
+                            'container' => $this->assetContainer,
                             'restrict' => false,
                             'allow_uploads' => true,
                             'type' => 'assets',
@@ -1838,7 +1842,7 @@ class MetatagsService
                             'display' => __('statamic-metatags::twitter.image'),
                             'instructions' => __('statamic-metatags::twitter.image_instructions'),
                             'mode' => 'list',
-                            'container' => 'assets',
+                            'container' => $this->assetContainer,
                             'restrict' => false,
                             'allow_uploads' => true,
                             'type' => 'assets',
@@ -2043,7 +2047,7 @@ class MetatagsService
                             'display' => __('statamic-metatags::pinterest.image'),
                             'instructions' => __('statamic-metatags::pinterest.image_instructions'),
                             'mode' => 'list',
-                            'container' => 'assets',
+                            'container' => $this->assetContainer,
                             'restrict' => false,
                             'allow_uploads' => true,
                             'max_files' => 6,
@@ -2329,7 +2333,7 @@ class MetatagsService
                             'display' => __('statamic-metatags::pinterest.color_image'),
                             'instructions' => __('statamic-metatags::pinterest.color_image_instructions'),
                             'mode' => 'list',
-                            'container' => 'assets',
+                            'container' => $this->assetContainer,
                             'restrict' => false,
                             'allow_uploads' => true,
                             'type' => 'assets',
@@ -2732,7 +2736,7 @@ class MetatagsService
                             'display' => __('statamic-metatags::android.manifest'),
                             'instructions' => __('statamic-metatags::android.manifest_instructions'),
                             'mode' => 'list',
-                            'container' => 'assets',
+                            'container' => $this->assetContainer,
                             'restrict' => false,
                             'allow_uploads' => true,
                             'max_files' => 1,
@@ -2761,7 +2765,7 @@ class MetatagsService
                             'display' => __('statamic-metatags::favicons.mask_icon'),
                             'instructions' => __('statamic-metatags::favicons.mask_icon_instructions'),
                             'mode' => 'list',
-                            'container' => 'assets',
+                            'container' => $this->assetContainer,
                             'restrict' => false,
                             'allow_uploads' => true,
                             'max_files' => 1,
@@ -2792,7 +2796,7 @@ class MetatagsService
                             'display' => __('statamic-metatags::favicons.apple_touch_icon'),
                             'instructions' => __('statamic-metatags::favicons.apple_touch_icon_instructions'),
                             'mode' => 'list',
-                            'container' => 'assets',
+                            'container' => $this->assetContainer,
                             'restrict' => false,
                             'allow_uploads' => true,
                             'max_files' => 1,
@@ -2807,7 +2811,7 @@ class MetatagsService
                             'display' => __('statamic-metatags::favicons.icon_16'),
                             'instructions' => __('statamic-metatags::favicons.icon_16_instructions'),
                             'mode' => 'list',
-                            'container' => 'assets',
+                            'container' => $this->assetContainer,
                             'restrict' => false,
                             'allow_uploads' => true,
                             'max_files' => 1,
@@ -2822,7 +2826,7 @@ class MetatagsService
                             'display' => __('statamic-metatags::favicons.icon_32'),
                             'instructions' => __('statamic-metatags::favicons.icon_32_instructions'),
                             'mode' => 'list',
-                            'container' => 'assets',
+                            'container' => $this->assetContainer,
                             'restrict' => false,
                             'allow_uploads' => true,
                             'max_files' => 1,
