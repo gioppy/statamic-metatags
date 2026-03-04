@@ -8,37 +8,25 @@ use Gioppy\StatamicMetatags\Services\MetatagsDefaultService;
 use Gioppy\StatamicMetatags\Services\MetatagsService;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Statamic\CP\PublishForm;
 use Statamic\Facades\Blueprint;
-use Statamic\Support\Arr;
 
 class DefaultsController extends Controller
 {
 
     public function edit()
     {
-        $blueprint = $this->blueprint();
-        $fields = $blueprint->fields()
-            ->addValues(MetatagsDefaultService::make()->values())
-            ->preProcess();
-
-        return view('statamic-metatags::defaults.edit', [
-            'title' => __('Defaults'),
-            'action' => cp_route('metatags.defaults.update'),
-            'blueprint' => $blueprint->toPublishArray(),
-            'meta' => $fields->meta(),
-            'values' => $fields->values(),
-        ]);
+        return PublishForm::make($this->blueprint())
+            ->title(__('Defaults'))
+            ->icon('forms')
+            ->values(MetatagsDefaultService::make()->values())
+            ->submittingTo(cp_route('metatags.defaults.update'));
     }
 
     public function update(Request $request)
     {
-        $blueprint = $this->blueprint();
-        $fields = $blueprint->fields()
-            ->addValues($request->all());
-
-        $fields->validate();
-
-        $values = Arr::removeNullValues($fields->process()->values()->all());
+        $values = PublishForm::make($this->blueprint())
+            ->submit($request->all());
 
         MetatagsDefaultService::make($values)->save();
     }

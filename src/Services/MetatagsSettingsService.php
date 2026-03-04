@@ -71,87 +71,78 @@ class MetatagsSettingsService
     {
         return Blueprint::make()
             ->setContents([
-                'sections' => [
-                    'meta' => [
-                        'display' => __('Metatags'),
-                        'fields' => [
+                'tabs' => [
+                    'main' => [
+                        'sections' => [
                             [
-                                'handle' => 'meta_section',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:meta_section'),
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:meta_section:instructions'),
-                                    'type' => 'section'
-                                ]
-                            ],
-                            [
-                                'handle' => 'basics',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:basics'),
-                                    'type' => 'checkboxes',
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:basics:instructions'),
-                                    'options' => [
-                                        'basic' => 'Basic Meta tags',
-                                        'advanced' => 'Advanced Meta tags',
+                                'display' => __('statamic-metatags::fieldsets.meta:meta_section'),
+                                'instructions' => __('statamic-metatags::fieldsets.meta:meta_section:instructions'),
+                                'fields' => [
+                                    [
+                                        'handle' => 'basics',
+                                        'field' => [
+                                            'display' => __('statamic-metatags::fieldsets.meta:basics'),
+                                            'instructions' => __('statamic-metatags::fieldsets.meta:basics:instructions'),
+                                            'type' => 'checkboxes',
+                                            'options' => [
+                                                'basic' => 'Basic Meta tags',
+                                                'advanced' => 'Advanced Meta tags',
+                                            ],
+                                        ],
                                     ],
                                 ],
                             ],
                             [
-                                'handle' => 'dublin_core_section',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:dublin_core'),
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:dublin_core_section:instructions'),
-                                    'type' => 'section',
-                                ],
-                            ],
-                            [
-                                'handle' => 'dublin_core',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:dublin_core'),
-                                    'type' => 'checkboxes',
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:dublin_core:instructions'),
-                                    'options' => [
-                                        'dublin_core' => 'Dublin Core',
-                                        'dublin_core_advanced' => 'Dublin core advanced tags',
+                                'display' => __('statamic-metatags::fieldsets.meta:dublin_core'),
+                                'instructions' => __('statamic-metatags::fieldsets.meta:dublin_core_section:instructions'),
+                                'fields' => [
+                                    [
+                                        'handle' => 'dublin_core',
+                                        'field' => [
+                                            'display' => __('statamic-metatags::fieldsets.meta:dublin_core'),
+                                            'type' => 'checkboxes',
+                                            'instructions' => __('statamic-metatags::fieldsets.meta:dublin_core:instructions'),
+                                            'options' => [
+                                                'dublin_core' => 'Dublin Core',
+                                                'dublin_core_advanced' => 'Dublin core advanced tags',
+                                            ],
+                                        ],
                                     ],
                                 ],
                             ],
                             [
-                                'handle' => 'facebook_section',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:facebook_section'),
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:facebook_section:instructions'),
-                                    'type' => 'section',
-                                ],
-                            ],
-                            [
-                                'handle' => 'facebook',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:facebook'),
-                                    'type' => 'checkboxes',
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:facebook:instructions'),
-                                    'options' => [
-                                        'og' => 'Open Graph',
-                                        'facebook' => 'Facebook App',
+                                'display' => __('statamic-metatags::fieldsets.meta:facebook_section'),
+                                'instructions' => __('statamic-metatags::fieldsets.meta:facebook_section:instructions'),
+                                'fields' => [
+                                    [
+                                        'handle' => 'facebook',
+                                        'field' => [
+                                            'display' => __('statamic-metatags::fieldsets.meta:facebook'),
+                                            'type' => 'checkboxes',
+                                            'instructions' => __('statamic-metatags::fieldsets.meta:facebook:instructions'),
+                                            'options' => [
+                                                'og' => 'Open Graph',
+                                                'facebook' => 'Facebook App',
+                                            ],
+                                        ],
                                     ],
                                 ],
                             ],
                             [
-                                'handle' => 'social_section',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:social_section'),
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:social_section:instructions'),
-                                    'type' => 'section',
-                                ],
-                            ],
-                            [
-                                'handle' => 'social',
-                                'field' => [
-                                    'display' => __('statamic-metatags::fieldsets.meta:social'),
-                                    'type' => 'checkboxes',
-                                    'instructions' => __('statamic-metatags::fieldsets.meta:social:instructions'),
-                                    'options' => [
-                                        'twitter' => 'Twitter',
-                                        'pinterest' => 'Pinterest',
+                                'display' => __('statamic-metatags::fieldsets.meta:social_section'),
+                                'instructions' => __('statamic-metatags::fieldsets.meta:social_section:instructions'),
+                                'fields' => [
+                                    [
+                                        'handle' => 'social',
+                                        'field' => [
+                                            'display' => __('statamic-metatags::fieldsets.meta:social'),
+                                            'type' => 'checkboxes',
+                                            'instructions' => __('statamic-metatags::fieldsets.meta:social:instructions'),
+                                            'options' => [
+                                                'twitter' => 'Twitter',
+                                                'pinterest' => 'Pinterest',
+                                            ],
+                                        ],
                                     ],
                                 ],
                             ],
