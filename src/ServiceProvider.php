@@ -54,7 +54,7 @@ class ServiceProvider extends AddonServiceProvider
         Nav::extend(function ($nav) {
             $nav->content('Meta tags')
                 ->route('metatags.index')
-                ->icon('angle-brackets-dots')
+                ->icon('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M20 12V5.749a.6.6 0 0 0-.176-.425l-3.148-3.148A.6.6 0 0 0 16.252 2H4.6a.6.6 0 0 0-.6.6v18.8a.6.6 0 0 0 .6.6H11M8 10h8M8 6h4m-4 8h3m9.5 6.5L22 22"/><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M15 18a3 3 0 1 0 6 0 3 3 0 0 0-6 0"/><path fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" d="M16 5.4V2.354a.354.354 0 0 1 .604-.25l3.292 3.292a.353.353 0 0 1-.25.604H16.6a.6.6 0 0 1-.6-.6"/></svg>')
                 ->can('manage metatags settings')
                 ->children([
                     'Settings' => cp_route('metatags.settings'),
