@@ -44,6 +44,10 @@ If you are on an older version of Statamic, please use one of these depending on
 
 ```composer require gioppy/statamic-metatags "^3.0"```
 
+#### Statamic >= 5.0 and < 6.0
+
+```composer require gioppy/statamic-metatags "^4.0"```
+
 ## How to use
 
 All meta tags are injected dynamically within an entry or term depending on the options selected for each individual blueprint.
