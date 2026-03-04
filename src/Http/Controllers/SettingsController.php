@@ -123,9 +123,6 @@ class SettingsController extends Controller
                                     'options' => [
                                         'site_verifications' => 'Site verifications',
                                     ],
-                                    'default' => [
-                                        'basic',
-                                    ],
                                 ],
                             ],
                             [
